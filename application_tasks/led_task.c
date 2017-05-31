@@ -5,6 +5,11 @@
 #include "queue.h"
 #include <stdio.h>
 
+/**
+ * This task reads analog input values from the queue, then updates the LEDs
+ * to display the value like a bar graph.
+ */
+
 extern xQueueHandle queue_h;
 
 void led_initialization()
@@ -22,23 +27,26 @@ void led_initialization()
 
 void led_task(void *para)
 {
-  long lReceivedValue;
-
-  while (1) {
-	 while ( uxQueueMessagesWaiting( queue_h ) == 0 ) {
-		 taskYIELD();
-	 }
-	 const int xStatus = xQueueReceive( queue_h, &lReceivedValue, 0 );
-	 if( xStatus == pdPASS ) {
-		 // value will be 600 to 3800, scale it as 0-255 now
-		 if (lReceivedValue < 600) {
-			 lReceivedValue = 600;
-		 }
-		 const double scaled_value = (lReceivedValue - 600.0) * 255.0 / (3800.0 - 600.0);
-		 MSS_GPIO_set_outputs(255 - round(scaled_value));
-	 }
-	 else {
-		 printf("\r\nError %d reading from queue\r\n", xStatus);
-	 }
-  }
+    while (1) {
+	      while (uxQueueMessagesWaiting(queue_h) == 0) {
+		      taskYIELD();
+	      }
+        long lReceivedValue;
+        const int xStatus = xQueueReceive(queue_h, &lReceivedValue, 0);
+        if (xStatus == pdPASS) {
+            // value received should be will be 600 to 3800, so threshold and scale it as 0-255 now
+            if (lReceivedValue < 600) {
+                lReceivedValue = 600;
+		        }
+            if (lReceivedValue > 3800) {
+                lReceivedValue = 3800;
+            }
+        		const double scaled_value = (lReceivedValue - 600.0) * 255.0 / (3800.0 - 600.0);
+        		MSS_GPIO_set_outputs(255 - round(scaled_value));
+	      }
+	      else {
+            printf("\r\nError %d reading from queue\r\n", xStatus);
+            break;
+        }
+    }
 }

@@ -37,7 +37,12 @@ int main()
     /* Initialization all necessary hardware components */
     init_system();
 
-    queue_h = xQueueCreate((unsigned portBASE_TYPE)QUEUE_LENGTH, 4);
+    // Create a queue for task IPC
+    queue_h = xQueueCreate((unsigned portBASE_TYPE)QUEUE_LENGTH, sizeof(unsigned long));
+    if (queue_h == NULL) {
+        printf("\r\nxQueueCreate failed, check there is enough heap memory allocated\r\n");
+        return EXIT_FAILURE;
+    }
 
     // Note that we create two tasks with the same priority.
     // FreeRTOS manages time slicing between equal priority tasks.
@@ -64,6 +69,7 @@ int main()
         printf("task create analog_read_task failed with code %d, exiting\r\n", c);
         return EXIT_FAILURE;
     }
+
     /* Enable the SYS TICK Timer and provide the divider and clock source
      * this is required to enable the RTOS tick */
     *(volatile unsigned long *)SYS_TICK_CTRL_AND_STATUS_REG = ENABLE_SYS_TICK;
@@ -74,6 +80,6 @@ int main()
 
     /* Will only get here if there was not enough heap space to create the
     idle task. */
-    printf("\r\nTest Case End: Should never Come here \n\r");
+    printf("\r\nScheduler has quit, sShould never come here \n\r");
     return EXIT_FAILURE;
 }
