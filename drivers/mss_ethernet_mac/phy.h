@@ -9,7 +9,7 @@
  ******************************************************************************/
 
 #ifndef __MSS_ETHERNET_MAC_PHY_H
-#define __MSS_ETHERNET_MAC_PHY_H	1
+#define __MSS_ETHERNET_MAC_PHY_H    1
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,7 +30,7 @@ void PHY_auto_negotiate( void );
 /***************************************************************************//**
  * Probe used PHY.
  *
- * return	PHY address. If PHY don't fount, returns 255.
+ * return    PHY address. If PHY don't fount, returns 255.
  */
 uint8_t PHY_probe( void );
 

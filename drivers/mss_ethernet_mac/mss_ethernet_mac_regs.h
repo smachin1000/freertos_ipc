@@ -52,66 +52,66 @@ typedef struct {
  * you modify some of these flags.
  */
 typedef struct {
-	addr_t		base_address;           /**< Register base address of the driver*/
-    uint8_t		flags;                  /**< Configuration of the driver*/
-    int8_t		last_error;             /**< Index of last error happened inside the driver*/
-    uint8_t     mac_address[6];			/**< MAC address of the drived instance*/
-    uint8_t     mac_filter_data[90];	/**< MAC filter data, 15 addresses to be used for 
+    addr_t        base_address;           /**< Register base address of the driver*/
+    uint8_t        flags;                  /**< Configuration of the driver*/
+    int8_t        last_error;             /**< Index of last error happened inside the driver*/
+    uint8_t     mac_address[6];            /**< MAC address of the drived instance*/
+    uint8_t     mac_filter_data[90];    /**< MAC filter data, 15 addresses to be used for 
                                             received data filtering*/
-    uint16_t	last_timer_value;		/**< Last read value of timer */
-    uint32_t	time_out_value;			/**< Time out value */
+    uint16_t    last_timer_value;        /**< Last read value of timer */
+    uint32_t    time_out_value;            /**< Time out value */
     MSS_MAC_callback_t listener;            /**< Pointer to the call-back function to be triggered 
                                             when a package is received*/
 
-	/* transmit related info: */
+    /* transmit related info: */
     uint32_t    tx_desc_index;          /**< index of the transmit descriptor getting used*/
     uint8_t     tx_buffers[TX_RING_SIZE][MSS_TX_BUFF_SIZE];/**< array of transmit buffers*/
     MAC_descriptor_t tx_descriptors[TX_RING_SIZE];/**< array of transmit descriptors*/
 
-	/* receive related info: */
+    /* receive related info: */
     uint32_t    rx_desc_index;          /**< index of the receive descriptor getting used*/
     uint8_t     rx_buffers[RX_RING_SIZE][MSS_RX_BUFF_SIZE+4];/**< array of receive buffers*/
     MAC_descriptor_t rx_descriptors[RX_RING_SIZE];/**< array of receive descriptors*/
     
-    uint8_t		phy_address;            /**< MII address of the connected PHY*/
+    uint8_t        phy_address;            /**< MII address of the connected PHY*/
     
-	struct {
-		uint32_t rx_interrupts;			/**< Number of receive interrupts occurred.*/
-		uint32_t rx_filtering_fail;		/**< Number of received frames which did not pass 
-											the address recognition process.*/
-		uint32_t rx_descriptor_error;	/**< Number of occurrences of; no receive buffer was
-											available when trying to store the received data.*/
-		uint32_t rx_runt_frame;			/**< Number of occurrences of; the frame is damaged by 
-											a collision or by a premature termination before 
-											the end of a collision window.*/
-		uint32_t rx_not_first;			/**< Number of occurrences of; start of the frame is 
-											not the first descriptor of a frame.*/
-		uint32_t rx_not_last;			/**< Number of occurrences of; end of the frame is not 
-											the first descriptor of a frame.*/
-		uint32_t rx_frame_too_long;		/**< Number of occurrences of; a current frame is 
-											longer than maximum size of 1,518 bytes, as specified 
-											by 802.3.*/
-		uint32_t rx_collision_seen;		/**< Number of occurrences of; a late collision was seen 
-											(collision after 64 bytes following SFD).*/
-		uint32_t rx_crc_error;			/**< Number of occurrences of; a CRC error has occurred 
-											in the received frame.*/
-		uint32_t rx_fifo_overflow;		/**< Number of frames not accepted due to the receive 
-											FIFO overflow.*/
-		uint32_t rx_missed_frame;		/**< Number of frames not accepted due to the 
-											unavailability of the receive descriptor.*/
-		
-		uint32_t tx_interrupts;			/**< Number of transmit interrupts occurred.*/
-		uint32_t tx_loss_of_carrier;	/**< Number of occurrences of; a loss of the carrier 
-											during a transmission.*/
-		uint32_t tx_no_carrier;			/**< Number of occurrences of; the carrier was not asserted
-											by an external transceiver during the transmission.*/
-		uint32_t tx_late_collision;		/**< Number of occurrences of; a collision was detected 
-											after transmitting 64 bytes.*/
-		uint32_t tx_excessive_collision;/**< Number of occurrences of; the transmission was 
-											aborted after 16 retries.*/
-		uint32_t tx_collision_count;	/**< Number of collisions occurred.*/
-		uint32_t tx_underflow_error;	/**< Number of occurrences of; the FIFO was empty during 
-											the frame transmission.*/
+    struct {
+        uint32_t rx_interrupts;            /**< Number of receive interrupts occurred.*/
+        uint32_t rx_filtering_fail;        /**< Number of received frames which did not pass 
+                                            the address recognition process.*/
+        uint32_t rx_descriptor_error;    /**< Number of occurrences of; no receive buffer was
+                                            available when trying to store the received data.*/
+        uint32_t rx_runt_frame;            /**< Number of occurrences of; the frame is damaged by 
+                                            a collision or by a premature termination before 
+                                            the end of a collision window.*/
+        uint32_t rx_not_first;            /**< Number of occurrences of; start of the frame is 
+                                            not the first descriptor of a frame.*/
+        uint32_t rx_not_last;            /**< Number of occurrences of; end of the frame is not 
+                                            the first descriptor of a frame.*/
+        uint32_t rx_frame_too_long;        /**< Number of occurrences of; a current frame is 
+                                            longer than maximum size of 1,518 bytes, as specified 
+                                            by 802.3.*/
+        uint32_t rx_collision_seen;        /**< Number of occurrences of; a late collision was seen 
+                                            (collision after 64 bytes following SFD).*/
+        uint32_t rx_crc_error;            /**< Number of occurrences of; a CRC error has occurred 
+                                            in the received frame.*/
+        uint32_t rx_fifo_overflow;        /**< Number of frames not accepted due to the receive 
+                                            FIFO overflow.*/
+        uint32_t rx_missed_frame;        /**< Number of frames not accepted due to the 
+                                            unavailability of the receive descriptor.*/
+        
+        uint32_t tx_interrupts;            /**< Number of transmit interrupts occurred.*/
+        uint32_t tx_loss_of_carrier;    /**< Number of occurrences of; a loss of the carrier 
+                                            during a transmission.*/
+        uint32_t tx_no_carrier;            /**< Number of occurrences of; the carrier was not asserted
+                                            by an external transceiver during the transmission.*/
+        uint32_t tx_late_collision;        /**< Number of occurrences of; a collision was detected 
+                                            after transmitting 64 bytes.*/
+        uint32_t tx_excessive_collision;/**< Number of occurrences of; the transmission was 
+                                            aborted after 16 retries.*/
+        uint32_t tx_collision_count;    /**< Number of collisions occurred.*/
+        uint32_t tx_underflow_error;    /**< Number of occurrences of; the FIFO was empty during 
+                                            the frame transmission.*/
     } statistics;
 } MAC_instance_t;
 
@@ -248,7 +248,7 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR0 - Bus Mode Register
  */
-#define CSR0_REG_OFFSET	0x00
+#define CSR0_REG_OFFSET    0x00
 
 /*------------------------------------------------------------------------------
  * CSR0_DBO:
@@ -355,7 +355,7 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR1 - Transmit Poll Demand Register
  */
-#define CSR1_REG_OFFSET	0x08
+#define CSR1_REG_OFFSET    0x08
 
 /*------------------------------------------------------------------------------
  * CSR1_TPD3:
@@ -402,7 +402,7 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR2 - Receive Poll Demand Register
  */
-#define CSR2_REG_OFFSET	0x10
+#define CSR2_REG_OFFSET    0x10
 
 /*------------------------------------------------------------------------------
  * CSR2_RPD3:
@@ -449,7 +449,7 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR3 - Receive Descriptor List Base Address Register
  */
-#define CSR3_REG_OFFSET	0x18
+#define CSR3_REG_OFFSET    0x18
 
 /*------------------------------------------------------------------------------
  * CSR3_RLA3:
@@ -496,7 +496,7 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR4 - Transmit Descriptor List Base Address Register
  */
-#define CSR4_REG_OFFSET	0x20
+#define CSR4_REG_OFFSET    0x20
 
 /*------------------------------------------------------------------------------
  * CSR4_TLA3:
@@ -543,10 +543,10 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR5 - Status Register
  */
-#define CSR5_REG_OFFSET	0x28
-#define CSR5_INT_BITS	(CSR5_NIS_MASK | CSR5_AIS_MASK | CSR5_ERI_MASK | \
-	CSR5_GTE_MASK | CSR5_ETI_MASK | CSR5_RPS_MASK | CSR5_RU_MASK | \
-	CSR5_RI_MASK | CSR5_UNF_MASK | CSR5_TU_MASK | CSR5_TPS_MASK | CSR5_TI_MASK)
+#define CSR5_REG_OFFSET    0x28
+#define CSR5_INT_BITS    (CSR5_NIS_MASK | CSR5_AIS_MASK | CSR5_ERI_MASK | \
+    CSR5_GTE_MASK | CSR5_ETI_MASK | CSR5_RPS_MASK | CSR5_RU_MASK | \
+    CSR5_RI_MASK | CSR5_UNF_MASK | CSR5_TU_MASK | CSR5_TPS_MASK | CSR5_TI_MASK)
 
 /*------------------------------------------------------------------------------
  * CSR5_TS:
@@ -724,7 +724,7 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR6 - Operation Mode Register
  */
-#define CSR6_REG_OFFSET	0x30
+#define CSR6_REG_OFFSET    0x30
 
 /*------------------------------------------------------------------------------
  * CSR6_RA:
@@ -861,7 +861,7 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR7 - Interrupt Enable Register
  */
-#define CSR7_REG_OFFSET	0x38
+#define CSR7_REG_OFFSET    0x38
 
 /*------------------------------------------------------------------------------
  * CSR7_NIE:
@@ -988,7 +988,7 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR8 - Missed Frames and Overflow Counter Register
  */
-#define CSR8_REG_OFFSET	0x40
+#define CSR8_REG_OFFSET    0x40
 
 /*------------------------------------------------------------------------------
  * CSR8_OCO:
@@ -1035,7 +1035,7 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR9 - MII Management and Serial ROM Interface Register
  */
-#define CSR9_REG_OFFSET	0x48
+#define CSR9_REG_OFFSET    0x48
 
 /*------------------------------------------------------------------------------
  * CSR9_MDI:
@@ -1122,7 +1122,7 @@ typedef struct
  *------------------------------------------------------------------------------
  * CSR11 - General-Purpose Timer and Interrupt Mitigation Control Register
  */
-#define CSR11_REG_OFFSET	0x58
+#define CSR11_REG_OFFSET    0x58
 
 /*------------------------------------------------------------------------------
  * CSR11_CS:

@@ -9,7 +9,7 @@
  ******************************************************************************/
  
 #ifndef __MSS_ETHERNET_MAC_CRC32_H
-#define __MSS_ETHERNET_MAC_CRC32_H	1
+#define __MSS_ETHERNET_MAC_CRC32_H    1
 
 #include <stdint.h>
 
@@ -43,4 +43,4 @@ mss_ethernet_crc
 }
 #endif
 
-#endif	/* __MSS_ETHERNET_MAC_CRC32_H */
+#endif    /* __MSS_ETHERNET_MAC_CRC32_H */

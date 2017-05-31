@@ -10,7 +10,7 @@
  *******************************************************************************/
 
 #ifndef __MSS_ETHERNET_MAC_H
-#define __MSS_ETHERNET_MAC_H	1
+#define __MSS_ETHERNET_MAC_H    1
 
 #include <stdint.h>
 
@@ -143,31 +143,31 @@ extern "C" {
 /*******************************************************************************
  * Time out values.
  */
-#define MSS_MAC_NONBLOCKING		0u
-#define MSS_MAC_BLOCKING		0xFFFFFFFFUL
+#define MSS_MAC_NONBLOCKING        0u
+#define MSS_MAC_BLOCKING        0xFFFFFFFFUL
 
 /***************************************************************************//**
  * MAC events.
  */
-#define MSS_MAC_EVENT_PACKET_SEND		1u
-#define MSS_MAC_EVENT_PACKET_RECEIVED	2u
+#define MSS_MAC_EVENT_PACKET_SEND        1u
+#define MSS_MAC_EVENT_PACKET_RECEIVED    2u
 
 /***************************************************************************//**
  * PHY addresses.
  */
-#define MSS_PHY_ADDRESS_MIN				0u
-#define MSS_PHY_ADDRESS_MAX				31u
-#define MSS_PHY_ADDRESS_AUTO_DETECT		255u
+#define MSS_PHY_ADDRESS_MIN                0u
+#define MSS_PHY_ADDRESS_MAX                31u
+#define MSS_PHY_ADDRESS_AUTO_DETECT        255u
 
 /***************************************************************************//**
  * Listener function type defines the function prototype that might be followed 
  * by MAC_isr which is triggered with each receive and transmit related interrupts.
  * Listener functions should follow the following prototype:
- *		void MAC_Listener( uint32_t events );
+ *        void MAC_Listener( uint32_t events );
  * The parameter is used to inform the listener function about the triggering event
  * or events. Events input to the system are:
- *      #define MSS_MAC_EVENT_PACKET_SEND		1
- *      #define MSS_MAC_EVENT_PACKET_RECEIVED	2
+ *      #define MSS_MAC_EVENT_PACKET_SEND        1
+ *      #define MSS_MAC_EVENT_PACKET_RECEIVED    2
  * Listener function should be defined by the application using this driver if 
  * needed. This function may be assigned to the driver using MAC_set_callback
  * routine and may be un assigned again by using the same routine with a NULL pointer
@@ -251,25 +251,25 @@ typedef void (*MSS_MAC_callback_t)(uint32_t events);
  *      the frame transmission.
  */
 typedef enum {
-	MSS_MAC_RX_INTERRUPTS,
-	MSS_MAC_RX_FILTERING_FAIL,
-	MSS_MAC_RX_DESCRIPTOR_ERROR,
-	MSS_MAC_RX_RUNT_FRAME,
-	MSS_MAC_RX_NOT_FIRST,
-	MSS_MAC_RX_NOT_LAST,
-	MSS_MAC_RX_FRAME_TOO_LONG,
-	MSS_MAC_RX_COLLISION_SEEN,
-	MSS_MAC_RX_CRC_ERROR,
-	MSS_MAC_RX_FIFO_OVERFLOW,
-	MSS_MAC_RX_MISSED_FRAME,
-	
-	MSS_MAC_TX_INTERRUPTS,
-	MSS_MAC_TX_LOSS_OF_CARRIER,
-	MSS_MAC_TX_NO_CARRIER,
-	MSS_MAC_TX_LATE_COLLISION,
-	MSS_MAC_TX_EXCESSIVE_COLLISION,
-	MSS_MAC_TX_COLLISION_COUNT,
-	MSS_MAC_TX_UNDERFLOW_ERROR
+    MSS_MAC_RX_INTERRUPTS,
+    MSS_MAC_RX_FILTERING_FAIL,
+    MSS_MAC_RX_DESCRIPTOR_ERROR,
+    MSS_MAC_RX_RUNT_FRAME,
+    MSS_MAC_RX_NOT_FIRST,
+    MSS_MAC_RX_NOT_LAST,
+    MSS_MAC_RX_FRAME_TOO_LONG,
+    MSS_MAC_RX_COLLISION_SEEN,
+    MSS_MAC_RX_CRC_ERROR,
+    MSS_MAC_RX_FIFO_OVERFLOW,
+    MSS_MAC_RX_MISSED_FRAME,
+    
+    MSS_MAC_TX_INTERRUPTS,
+    MSS_MAC_TX_LOSS_OF_CARRIER,
+    MSS_MAC_TX_NO_CARRIER,
+    MSS_MAC_TX_LATE_COLLISION,
+    MSS_MAC_TX_EXCESSIVE_COLLISION,
+    MSS_MAC_TX_COLLISION_COUNT,
+    MSS_MAC_TX_UNDERFLOW_ERROR
 } mss_mac_statistics_id_t; 
 
 /******************************* FUNCTIONS ************************************/
@@ -355,13 +355,13 @@ MSS_MAC_get_configuration
  * @param pacData       the pointer to the packet data to be transmitted.
  * @param pacLen        number of bytes in the packet to be transmitted.
  * @param time_out      Time out value for transmision.
- * 					    If value is #MSS_MAC_BLOCKING, there will be no time out.
- * 		    			If value is #MSS_MAC_NONBLOCKING, function will return immediately 
- * 		    			on buffer full case.
- * 		    			Otherwise value must be greater than 0 and smaller than 
- * 		    			0x01000000.
- * @return				Returns 0 if time out occurs otherwise returns size 
- * 						of the packet.
+ *                         If value is #MSS_MAC_BLOCKING, there will be no time out.
+ *                         If value is #MSS_MAC_NONBLOCKING, function will return immediately 
+ *                         on buffer full case.
+ *                         Otherwise value must be greater than 0 and smaller than 
+ *                         0x01000000.
+ * @return                Returns 0 if time out occurs otherwise returns size 
+ *                         of the packet.
  * @see   MAC_rx_packet()
  */
 int32_t
@@ -414,13 +414,13 @@ MSS_MAC_prepare_rx_descriptor
  * @param pacLen        Size of the buffer, which the received data will be copied in,
  *                      given in number of bytes.
  * @param time_out      Time out value in milli seconds for receiving.
- * 					    if value is #MSS_MAC_BLOCKING, there will be no time out.
- * 					    if value is #MSS_MAC_NONBLOCKING, function will return immediately
- * 					    if there is no packet waiting.
- * 					    Otherwise value must be greater than 0 and smaller than 
- * 					    0x01000000.
+ *                         if value is #MSS_MAC_BLOCKING, there will be no time out.
+ *                         if value is #MSS_MAC_NONBLOCKING, function will return immediately
+ *                         if there is no packet waiting.
+ *                         Otherwise value must be greater than 0 and smaller than 
+ *                         0x01000000.
  * @return              Size of packet if packet fits in pacData.
- * 					    0 if there is no received packet.
+ *                         0 if there is no received packet.
  * @see   MAC_rx_pckt_size()
  * @see   MAC_tx_packet()
  */
@@ -460,7 +460,7 @@ MSS_MAC_rx_packet
           have been received. 
 
   @return
-  	The function returns the size of the packet if the packet fits in pacData.
+      The function returns the size of the packet if the packet fits in pacData.
     Returns zero if there is no received packet.
                         
   @see   MAC_rx_pckt_size()
@@ -543,7 +543,7 @@ void
 MSS_MAC_set_mac_filters
 (
     uint16_t filter_count,
-	const uint8_t *filters
+    const uint8_t *filters
 );
 
 /***************************************************************************//**
@@ -565,7 +565,7 @@ MSS_MAC_set_callback
  * Returns description of latest error happened.
  *
  * @return              A string describing the error. This string must not be 
- * 						modified by the application.
+ *                         modified by the application.
  */
 const int8_t* 
 MSS_MAC_last_error
@@ -577,19 +577,19 @@ MSS_MAC_last_error
 /***************************************************************************//**
  * Returns statistics counter of stat_id identifier.
  * 
- * @param stat_id		Identifier of statistics counter.
- * @return				Statistics counter of stat_id identifier.
- * 						On error returns 0.
+ * @param stat_id        Identifier of statistics counter.
+ * @return                Statistics counter of stat_id identifier.
+ *                         On error returns 0.
  */
 uint32_t
 MSS_MAC_get_statistics
 (
-	mss_mac_statistics_id_t stat_id
+    mss_mac_statistics_id_t stat_id
 );
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif	/* __MSS_ETHERNET_MAC_H */
+#endif    /* __MSS_ETHERNET_MAC_H */
 

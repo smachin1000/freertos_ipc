@@ -8,7 +8,7 @@
  * SVN $Date: 2010-02-24 21:21:12 +0000 (Wed, 24 Feb 2010) $
  *******************************************************************************/
 #ifndef __MSS_ETHERNET_MAC_CONF_H
-#define __MSS_ETHERNET_MAC_CONF_H	1
+#define __MSS_ETHERNET_MAC_CONF_H    1
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,7 +18,7 @@ extern "C" {
  * Default MAC address
  */
 #define DEFAULT_MAC_ADDRESS             0xC0u,0xB1u,0x3Cu,0x88u,0x88u,0x88u
-#define BROADCAST_MAC_ADDRESS 			0xFFu,0xFFu,0xFFu,0xFFu,0xFFu,0xFFu
+#define BROADCAST_MAC_ADDRESS             0xFFu,0xFFu,0xFFu,0xFFu,0xFFu,0xFFu
 
 /**
  * Descriptor byte ordering mode.
@@ -39,5 +39,5 @@ extern "C" {
 }
 #endif
 
-#endif	/* __MSS_ETHERNET_MAC_CONF_H */
+#endif    /* __MSS_ETHERNET_MAC_CONF_H */
 

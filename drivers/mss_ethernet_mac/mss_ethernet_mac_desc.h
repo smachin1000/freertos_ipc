@@ -8,7 +8,7 @@
  * SVN $Date: 2010-02-24 21:21:12 +0000 (Wed, 24 Feb 2010) $
  *******************************************************************************/
 #ifndef __MSS_ETHERNET_MAC_DESC_H
-#define __MSS_ETHERNET_MAC_DESC_H	1
+#define __MSS_ETHERNET_MAC_DESC_H    1
 
 #ifdef __cplusplus
 extern "C" {
@@ -40,8 +40,8 @@ extern "C" {
  * Indicates the length, in bytes, of the data transferred into a host memory for a given frame
  * This bit is valid only when RDES0.8 (last descriptor) is set and RDES0.14 (descriptor error) is cleared.
  */
-#define RDES0_FL_MASK	0x00003FFFUL
-#define RDES0_FL_OFFSET	16
+#define RDES0_FL_MASK    0x00003FFFUL
+#define RDES0_FL_OFFSET    16
 
 /***************************************************************************//**
  * Error summary.
@@ -161,16 +161,16 @@ extern "C" {
  * multiple of four. If it is 0, Core10/100 ignores the second data buffer and fetches the next data descriptor.
  * This number is valid only when RDES1.24 (second address chained) is cleared.
  */
-#define RDES1_RBS2_MASK		0x7FF
-#define RDES1_RBS2_OFFSET	11
+#define RDES1_RBS2_MASK        0x7FF
+#define RDES1_RBS2_OFFSET    11
 
 /***************************************************************************//**
  * Buffer 1 size
  * Indicates the size, in bytes, of memory space used by the first data buffer. This number must be a multiple of
  * four. If it is 0, Core10/100 ignores the first data buffer and uses the second data buffer.
  */
-#define RDES1_RBS1_MASK		0x7FF
-#define RDES1_RBS1_OFFSET	0
+#define RDES1_RBS1_MASK        0x7FF
+#define RDES1_RBS1_OFFSET    0
 
 
 /*******************************************************************************
@@ -233,8 +233,8 @@ extern "C" {
  * This value is not valid when TDES0.8 (excessive collisions bit) is set.
  * This bit is valid only when TDES1.30 (last descriptor) is set.
  */
-#define TDES0_CC_MASK	0xFu
-#define TDES0_CC_OFFSET	3u
+#define TDES0_CC_MASK    0xFu
+#define TDES0_CC_OFFSET    3u
 
 /***************************************************************************//**
  * Underflow error.
@@ -327,20 +327,20 @@ extern "C" {
  * the second data buffer and fetches the next data descriptor.
  * This bit is valid only when TDES1.24 (second address chained) is cleared.
  */
-#define TDES1_TBS2_MASK		0x7FF
-#define TDES1_TBS2_OFFSET	11u
+#define TDES1_TBS2_MASK        0x7FF
+#define TDES1_TBS2_OFFSET    11u
 
 /***************************************************************************//**
  * Buffer 1 size.
  * Indicates the size, in bytes, of memory space used by the first data buffer. If it is 0, Core10/100 ignores the
  * first data buffer and uses the second data buffer.
  */
-#define TDES1_TBS1_MASK		0x7FF
-#define TDES1_TBS1_OFFSET	0u
+#define TDES1_TBS1_MASK        0x7FF
+#define TDES1_TBS1_OFFSET    0u
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif	/* __MSS_ETHERNET_MAC_DESC_H */
+#endif    /* __MSS_ETHERNET_MAC_DESC_H */
 

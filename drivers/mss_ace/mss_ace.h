@@ -347,7 +347,7 @@ void ACE_init( void );
  */
 void ACE_start_adc
 (
-	adc_channel_id_t channel_id
+    adc_channel_id_t channel_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -478,8 +478,8 @@ typedef enum
  */
 void ACE_configure_sdd
 (
-	sdd_id_t            sdd_id,
-	sdd_resolution_t    resolution,
+    sdd_id_t            sdd_id,
+    sdd_resolution_t    resolution,
     uint8_t             mode,
     sdd_update_method_t sync_update
 );
@@ -492,7 +492,7 @@ void ACE_configure_sdd
  */
 void ACE_enable_sdd
 (
-	sdd_id_t    sdd_id
+    sdd_id_t    sdd_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -503,7 +503,7 @@ void ACE_enable_sdd
  */
 void ACE_disable_sdd
 (
-	sdd_id_t    sdd_id
+    sdd_id_t    sdd_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -529,8 +529,8 @@ void ACE_disable_sdd
  */
 void ACE_set_sdd_value
 (
-	sdd_id_t    sdd_id,
-	uint32_t    sdd_value
+    sdd_id_t    sdd_id,
+    uint32_t    sdd_value
 );
 
 
@@ -1092,7 +1092,7 @@ typedef enum
  */
 void ACE_enable_sse_irq
 (
-	sse_irq_id_t sse_irq_id
+    sse_irq_id_t sse_irq_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -1105,7 +1105,7 @@ void ACE_enable_sse_irq
  */
 void ACE_disable_sse_irq
 (
-	sse_irq_id_t sse_irq_id
+    sse_irq_id_t sse_irq_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -1118,7 +1118,7 @@ void ACE_disable_sse_irq
  */
 void ACE_clear_sse_irq
 (
-	sse_irq_id_t sse_irq_id
+    sse_irq_id_t sse_irq_id
 );
 
 /** @} */
@@ -1239,7 +1239,7 @@ void ACE_set_comp_reference
  */
 void ACE_set_comp_hysteresis
 (
-	comparator_id_t     comp_id,
+    comparator_id_t     comp_id,
     comp_hysteresis_t   hysteresis
 );
 
@@ -1253,7 +1253,7 @@ void ACE_set_comp_hysteresis
  */
 void ACE_enable_comp
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -1266,7 +1266,7 @@ void ACE_enable_comp
  */
 void ACE_disable_comp
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -1293,7 +1293,7 @@ void ACE_disable_comp
  */
 void ACE_enable_comp_rise_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -1307,7 +1307,7 @@ void ACE_enable_comp_rise_irq
  */
 void ACE_disable_comp_rise_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -1330,7 +1330,7 @@ void ACE_disable_comp_rise_irq
  */
 void ACE_clear_comp_rise_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -1357,7 +1357,7 @@ void ACE_clear_comp_rise_irq
  */
 void ACE_enable_comp_fall_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -1371,7 +1371,7 @@ void ACE_enable_comp_fall_irq
  */
 void ACE_disable_comp_fall_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -1394,7 +1394,7 @@ void ACE_disable_comp_fall_irq
  */
 void ACE_clear_comp_fall_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -2803,8 +2803,8 @@ int16_t ACE_get_default_c_offset
 void ACE_set_linear_transform
 (
     ace_channel_handle_t channel_handle,
-	int16_t m2,
-	int16_t c2
+    int16_t m2,
+    int16_t c2
 );
 
 /** @} */
@@ -2813,4 +2813,4 @@ void ACE_set_linear_transform
 }
 #endif
 
-#endif	/* __MSS_ACE_H_ */
+#endif    /* __MSS_ACE_H_ */

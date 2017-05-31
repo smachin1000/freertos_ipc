@@ -276,14 +276,14 @@ typedef enum __mss_spi_protocol_mode_t
  */
  typedef enum __mss_spi_pclk_div_t
  {
-	MSS_SPI_PCLK_DIV_2		= 0,
-	MSS_SPI_PCLK_DIV_4		= 1,
-	MSS_SPI_PCLK_DIV_8		= 2,
-	MSS_SPI_PCLK_DIV_16		= 3,
-	MSS_SPI_PCLK_DIV_32		= 4,
-	MSS_SPI_PCLK_DIV_64		= 5,
-	MSS_SPI_PCLK_DIV_128	= 6,
-	MSS_SPI_PCLK_DIV_256	= 7
+    MSS_SPI_PCLK_DIV_2        = 0,
+    MSS_SPI_PCLK_DIV_4        = 1,
+    MSS_SPI_PCLK_DIV_8        = 2,
+    MSS_SPI_PCLK_DIV_16        = 3,
+    MSS_SPI_PCLK_DIV_32        = 4,
+    MSS_SPI_PCLK_DIV_64        = 5,
+    MSS_SPI_PCLK_DIV_128    = 6,
+    MSS_SPI_PCLK_DIV_256    = 7
 } mss_spi_pclk_div_t;
 
 /***************************************************************************//**
@@ -293,14 +293,14 @@ typedef enum __mss_spi_protocol_mode_t
  */
  typedef enum __mss_spi_slave_t
  {
-	MSS_SPI_SLAVE_0		= 0,
-	MSS_SPI_SLAVE_1		= 1,
-	MSS_SPI_SLAVE_2		= 2,
-	MSS_SPI_SLAVE_3		= 3,
-	MSS_SPI_SLAVE_4		= 4,
-	MSS_SPI_SLAVE_5		= 5,
-	MSS_SPI_SLAVE_6		= 6,
-	MSS_SPI_SLAVE_7		= 7,
+    MSS_SPI_SLAVE_0        = 0,
+    MSS_SPI_SLAVE_1        = 1,
+    MSS_SPI_SLAVE_2        = 2,
+    MSS_SPI_SLAVE_3        = 3,
+    MSS_SPI_SLAVE_4        = 4,
+    MSS_SPI_SLAVE_5        = 5,
+    MSS_SPI_SLAVE_6        = 6,
+    MSS_SPI_SLAVE_7        = 7,
     MSS_SPI_MAX_NB_OF_SLAVES = 8
 } mss_spi_slave_t;
 
@@ -341,15 +341,15 @@ typedef struct __mss_spi_instance_t
     SPI_BitBand_TypeDef *  hw_reg_bit; /*!< Pointer to SPI registers bit band area. */
     IRQn_Type               irqn;       /*!< SPI's Cortex-M3 NVIC interrupt number. */
     
-	/* Internal transmit state: */
-	const uint8_t * slave_tx_buffer;    /*!< Pointer to slave transmit buffer. */
-	uint32_t slave_tx_size;             /*!< Size of slave transmit buffer. */
-	uint32_t slave_tx_idx;              /*!< Current index into slave transmit buffer. */
-	
-	/* Internal receive state: */
-	uint8_t * slave_rx_buffer;          /*!< Pointer to buffer where data received by a slave will be stored. */
-	uint32_t slave_rx_size;             /*!< Slave receive buffer size. */
-	uint32_t slave_rx_idx;              /*!< Current index into slave receive buffer. */
+    /* Internal transmit state: */
+    const uint8_t * slave_tx_buffer;    /*!< Pointer to slave transmit buffer. */
+    uint32_t slave_tx_size;             /*!< Size of slave transmit buffer. */
+    uint32_t slave_tx_idx;              /*!< Current index into slave transmit buffer. */
+    
+    /* Internal receive state: */
+    uint8_t * slave_rx_buffer;          /*!< Pointer to buffer where data received by a slave will be stored. */
+    uint32_t slave_rx_size;             /*!< Slave receive buffer size. */
+    uint32_t slave_rx_idx;              /*!< Current index into slave receive buffer. */
     
     /* Configuration for each target slave. */
     mss_spi_slave_cfg_t slaves_cfg[MSS_SPI_MAX_NB_OF_SLAVES];
@@ -399,7 +399,7 @@ extern mss_spi_instance_t g_mss_spi1;
  */
 void MSS_SPI_init
 (
-	mss_spi_instance_t * this_spi
+    mss_spi_instance_t * this_spi
 );
 
 /***************************************************************************//**
@@ -456,7 +456,7 @@ void MSS_SPI_init
  */ 
 void MSS_SPI_configure_slave_mode
 (
-	mss_spi_instance_t * this_spi,
+    mss_spi_instance_t * this_spi,
     mss_spi_protocol_mode_t protocol_mode,
     mss_spi_pclk_div_t clk_rate,
     uint8_t frame_bit_length
@@ -544,8 +544,8 @@ void MSS_SPI_configure_slave_mode
  */ 
 void MSS_SPI_configure_master_mode
 (
-	mss_spi_instance_t *    this_spi,
-	mss_spi_slave_t         slave,
+    mss_spi_instance_t *    this_spi,
+    mss_spi_slave_t         slave,
     mss_spi_protocol_mode_t protocol_mode,
     mss_spi_pclk_div_t      clk_rate,
     uint8_t                 frame_bit_length
@@ -594,8 +594,8 @@ void MSS_SPI_configure_master_mode
  */
 void MSS_SPI_set_slave_select
 (
-	mss_spi_instance_t * this_spi,
-	mss_spi_slave_t slave
+    mss_spi_instance_t * this_spi,
+    mss_spi_slave_t slave
 );
 
 /***************************************************************************//**
@@ -636,8 +636,8 @@ void MSS_SPI_set_slave_select
  */
 void MSS_SPI_clear_slave_select
 (
-	mss_spi_instance_t * this_spi,
-	mss_spi_slave_t slave
+    mss_spi_instance_t * this_spi,
+    mss_spi_slave_t slave
 );
 
 /***************************************************************************//**

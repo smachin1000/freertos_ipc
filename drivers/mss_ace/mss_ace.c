@@ -42,7 +42,7 @@ void ACE_init( void )
  */
 void ACE_start_adc
 (
-	adc_channel_id_t channel_id
+    adc_channel_id_t channel_id
 )
 {
     ACE->ADC0_CONV_CTRL = (uint32_t)channel_id | START_ADC_CONVERSION;
@@ -142,8 +142,8 @@ static const mtd_data_t * const p_mtd_data = (mtd_data_t *)MTD_ADDRESS;
 
 void ACE_configure_sdd
 (
-	sdd_id_t            sdd_id,
-	sdd_resolution_t    resolution,
+    sdd_id_t            sdd_id,
+    sdd_resolution_t    resolution,
     uint8_t             mode,
     sdd_update_method_t sync_update
 )
@@ -206,7 +206,7 @@ void ACE_configure_sdd
  */
 void ACE_enable_sdd
 (
-	sdd_id_t    sdd_id
+    sdd_id_t    sdd_id
 )
 {
     ASSERT( sdd_id < NB_OF_SDD );
@@ -222,7 +222,7 @@ void ACE_enable_sdd
  */
 void ACE_disable_sdd
 (
-	sdd_id_t    sdd_id
+    sdd_id_t    sdd_id
 )
 {
     ASSERT( sdd_id < NB_OF_SDD );
@@ -238,8 +238,8 @@ void ACE_disable_sdd
  */
 void ACE_set_sdd_value
 (
-	sdd_id_t    sdd_id,
-	uint32_t    sdd_value
+    sdd_id_t    sdd_id,
+    uint32_t    sdd_value
 )
 {
     ASSERT( sdd_id < NB_OF_SDD );
@@ -396,7 +396,7 @@ void ACE_set_comp_reference
  */
 void ACE_set_comp_hysteresis
 (
-	comparator_id_t     comp_id,
+    comparator_id_t     comp_id,
     comp_hysteresis_t   hysteresis
 )
 {
@@ -439,7 +439,7 @@ void ACE_set_comp_hysteresis
  */
 void ACE_enable_comp
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 )
 {
     uint8_t scb_id;
@@ -480,7 +480,7 @@ void ACE_enable_comp
  */
 void ACE_disable_comp
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 )
 {
     uint8_t scb_id;
@@ -535,7 +535,7 @@ void ACE_disable_comp
  */
 void ACE_enable_comp_rise_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 )
 {
     ASSERT( comp_id < NB_OF_COMPARATORS );
@@ -548,7 +548,7 @@ void ACE_enable_comp_rise_irq
  */
 void ACE_disable_comp_rise_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 )
 {
     ASSERT( comp_id < NB_OF_COMPARATORS );
@@ -561,7 +561,7 @@ void ACE_disable_comp_rise_irq
  */
 void ACE_clear_comp_rise_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 )
 {
     ASSERT( comp_id < NB_OF_COMPARATORS );
@@ -574,7 +574,7 @@ void ACE_clear_comp_rise_irq
  */
 void ACE_enable_comp_fall_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 )
 {
     ASSERT( comp_id < NB_OF_COMPARATORS );
@@ -587,7 +587,7 @@ void ACE_enable_comp_fall_irq
  */
 void ACE_disable_comp_fall_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 )
 {
     ASSERT( comp_id < NB_OF_COMPARATORS );
@@ -600,7 +600,7 @@ void ACE_disable_comp_fall_irq
  */
 void ACE_clear_comp_fall_irq
 (
-	comparator_id_t comp_id
+    comparator_id_t comp_id
 )
 {
     ASSERT( comp_id < NB_OF_COMPARATORS );

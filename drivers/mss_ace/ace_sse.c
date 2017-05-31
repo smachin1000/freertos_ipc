@@ -230,7 +230,7 @@ void ACE_resume_sse
  */
 void ACE_enable_sse_irq
 (
-	sse_irq_id_t sse_irq_id
+    sse_irq_id_t sse_irq_id
 )
 {
     ASSERT( sse_irq_id < NB_OF_SSE_FLAG_IRQS );
@@ -243,7 +243,7 @@ void ACE_enable_sse_irq
  */
 void ACE_disable_sse_irq
 (
-	sse_irq_id_t sse_irq_id
+    sse_irq_id_t sse_irq_id
 )
 {
     ASSERT( sse_irq_id < NB_OF_SSE_FLAG_IRQS );
@@ -256,7 +256,7 @@ void ACE_disable_sse_irq
  */
 void ACE_clear_sse_irq
 (
-	sse_irq_id_t sse_irq_id
+    sse_irq_id_t sse_irq_id
 )
 {
     ASSERT( sse_irq_id < NB_OF_SSE_FLAG_IRQS );

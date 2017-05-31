@@ -4,13 +4,13 @@
  *  tcpip.h:header file of TCP/IP implementation.
  * 
  *  Version       Author         Comment
- *  1.0.0         SLS corp.		 First release,16 Jan 2009
+ *  1.0.0         SLS corp.         First release,16 Jan 2009
  */
 #ifndef TCPIP_H_
 #define TCPIP_H_
 
 #define FLASH_CONTEXT_INDICATOR      0x20000000
-#define FLASH_SELFWAKEUP_INDICATOR	 0x20000001
+#define FLASH_SELFWAKEUP_INDICATOR     0x20000001
 #define FLASH_CONTEXT_LOCATION       0x20000002
 
 /***************************************************************************//**
@@ -31,7 +31,7 @@ void send_gratuitous_arp(unsigned char *buf);
  * Calculates the checksum for Ethernet data in the header.
  * 
  *  @param  buf      Pointer to the recieved buffer from Ethernet MAC.
- *  @param  len		 Number of bytes.
+ *  @param  len         Number of bytes.
  *  @param  pos      position for the check sum.   
  * 
  *  @return          value of the checksum
@@ -42,7 +42,7 @@ unsigned short int get_checksum(unsigned char *buf, unsigned short int len, unsi
  * position.
  * 
  *  @param  buf      Pointer to the recieved buffer from Ethernet MAC.
- *  @param  len		 Number of bytes.
+ *  @param  len         Number of bytes.
  *  @param  pos      position for the check sum.
  * 
  *   @return         OK
@@ -52,11 +52,11 @@ unsigned char fix_checksum(unsigned char *buf, unsigned short int len, unsigned 
  * Checks the calculated checksum for the errors.
  * 
  * @param  buf      Pointer to the recieved buffer from Ethernet MAC.
- * @param  len		Number of bytes.
+ * @param  len        Number of bytes.
  * @param  pos      position for the check sum.
  * 
  * @return OK       If there is no error
- *	       ERR		If there is error in the data  		  	
+ *           ERR        If there is error in the data                
  */
 unsigned char check_checksum(unsigned char *buf, unsigned short int len, unsigned short int pos, char type);
 /***************************************************************************//**
@@ -69,7 +69,7 @@ unsigned char send_icmp_echo_reply(unsigned char *buf);
  * Converts the input integer to the ascii char and fills in the buffer. 
  * 
  *  @param  buf      To filled in by the ascii value.
- *  @param  n		 integer number
+ *  @param  n         integer number
  */
 void dtoa_reverse(unsigned short int n, unsigned char *buf);
 /***************************************************************************//**
@@ -99,9 +99,9 @@ unsigned char tcp_init(void);
 /***************************************************************************//**
  * Converts two hex decimal ascii digits into a sigle integer digit.
  * 
- * @param 	u  ascii hex digit 
- * 		  	l  ascii hex digit
- * @returm	converted integer byte
+ * @param     u  ascii hex digit 
+ *               l  ascii hex digit
+ * @returm    converted integer byte
  * 
  */
 unsigned char hex_digits_to_byte(unsigned char u, unsigned char l);
@@ -111,7 +111,7 @@ unsigned char hex_digits_to_byte(unsigned char u, unsigned char l);
  * @param  buf  Pointer to the recieved buffer from Ethernet MAC.
  * 
  * @return ERR  if there is an error in the data
- * 				or calls further necessary functions.
+ *                 or calls further necessary functions.
  */
 unsigned char process_icmp_packet(unsigned char *buf);
 /***************************************************************************//**
@@ -150,14 +150,14 @@ unsigned char process_arp_packet(unsigned char *buf);
  * Processes incoming packets and identifies its type.
  * 
  * @param  buf  Pointer to the recieved buffer from Ethernet MAC.
- * @return 		call the function for further process
- * 		   ERR   if any error
+ * @return         call the function for further process
+ *            ERR   if any error
  */
 unsigned char process_packet( unsigned char * buf );
 /***************************************************************************//**
  * copies source string to destination address.
  * 
- * @param d	 Pointer to the destination
+ * @param d     Pointer to the destination
  * @param s  Pointer to the source
  * @return   The last location after copy
  * 

@@ -1,9 +1,9 @@
 /*******************************************************************************
  * (c) Copyright 2009 SLS Corporation,All Rights Reserved.
  *
- *	tcpip.h:header file for TCP/IP implementation.
+ *    tcpip.h:header file for TCP/IP implementation.
  *  Version       Author         Comment
- *  1.0.0         SLS corp.		 First release
+ *  1.0.0         SLS corp.         First release
  */
 /***************************************************************************//**
  * This header file contains the definition and datastructures for the TCP/IP 
@@ -26,43 +26,43 @@
 #define ARP_PROTO_TYPE_LEN 2
 #define ARP_OPCODE_LEN 2
 
-#define ETH_TYPE_0     0x08	/* both IP and ARP have 08 as the first byte */
-#define ETH_TYPE_ARP_1 0x06	/* 0806 is ARP */
-#define ETH_TYPE_IP_1  0x00	/* 0800 is IP */
+#define ETH_TYPE_0     0x08    /* both IP and ARP have 08 as the first byte */
+#define ETH_TYPE_ARP_1 0x06    /* 0806 is ARP */
+#define ETH_TYPE_IP_1  0x00    /* 0800 is IP */
 
-#define ARP_HW_TYPE_0  0x00	/* 0001 for ethernet */
-#define ARP_HW_TYPE_1  0x01	/* 0001 for ethernet */
+#define ARP_HW_TYPE_0  0x00    /* 0001 for ethernet */
+#define ARP_HW_TYPE_1  0x01    /* 0001 for ethernet */
 
-#define ARP_PROTO_TYPE_0 0x08	/* 0800 is IP */
+#define ARP_PROTO_TYPE_0 0x08    /* 0800 is IP */
 #define ARP_PROTO_TYPE_1 0x00   
 
-#define ARP_OPCODE_0 0x00	/* same for req and reply */
-#define ARP_OPCODE_REQ_1 0x01	/* 0001 is Request */
-#define ARP_OPCODE_REPLY_1 0x02	/* 0002 is Reply */
+#define ARP_OPCODE_0 0x00    /* same for req and reply */
+#define ARP_OPCODE_REQ_1 0x01    /* 0001 is Request */
+#define ARP_OPCODE_REPLY_1 0x02    /* 0002 is Reply */
 
 extern unsigned char my_IP_address[IP_ADDR_LEN];
 
 typedef struct ether_hdr {
-    unsigned char da[ETH_ADDR_LEN];	/* destination MAC address */
-    unsigned char sa[ETH_ADDR_LEN];	/* source MAC address */
+    unsigned char da[ETH_ADDR_LEN];    /* destination MAC address */
+    unsigned char sa[ETH_ADDR_LEN];    /* source MAC address */
     unsigned char type_code[ETH_TYPE_LEN]; /* type code */
 } ether_hdr_t;
 
 typedef struct arp_pkt {
     unsigned char hw_type[ARP_HW_TYPE_LEN]; /* Hardware Type */
     unsigned char proto_type[ARP_PROTO_TYPE_LEN]; /* Protocol Type */
-    unsigned char hw_addr_len;		/* Hardware Address Length */
-    unsigned char proto_addr_len; 	/* Protocol Address Length */
+    unsigned char hw_addr_len;        /* Hardware Address Length */
+    unsigned char proto_addr_len;     /* Protocol Address Length */
     unsigned char opcode[ARP_OPCODE_LEN]; /* Opcode */
     unsigned char mac_sa[ETH_ADDR_LEN]; /* sender MAC address */
-    unsigned char ip_sa[IP_ADDR_LEN];	/* sender IP address */
+    unsigned char ip_sa[IP_ADDR_LEN];    /* sender IP address */
     unsigned char mac_ta[ETH_ADDR_LEN]; /* target MAC address */
-    unsigned char ip_ta[IP_ADDR_LEN];	/* target IP address */
+    unsigned char ip_ta[IP_ADDR_LEN];    /* target IP address */
 } arp_pkt_t;
 
-#define ICMP_PROTO	0x01
-#define	TCP_PROTO	0x06
-#define	UDP_PROTO	0x11
+#define ICMP_PROTO    0x01
+#define    TCP_PROTO    0x06
+#define    UDP_PROTO    0x11
 
 #define IP_CSUM_LEN     2
 #define IP_ID_LEN       2
@@ -70,16 +70,16 @@ typedef struct arp_pkt {
 #define IP_FRAG_OFF_LEN 2
 
 typedef struct ip_hdr {
-    unsigned char ver_hlen;		/* version - 4 bits;  IP hdr len - 4 bits */
-    unsigned char tos;			/* Type of service */
-    unsigned char tlen[IP_TLEN_LEN];	/* Size of datagram (header + data) */
-    unsigned char id[IP_ID_LEN];	/* together with sa, uniequly identifies pkt */
+    unsigned char ver_hlen;        /* version - 4 bits;  IP hdr len - 4 bits */
+    unsigned char tos;            /* Type of service */
+    unsigned char tlen[IP_TLEN_LEN];    /* Size of datagram (header + data) */
+    unsigned char id[IP_ID_LEN];    /* together with sa, uniequly identifies pkt */
     unsigned char frag_off[IP_FRAG_OFF_LEN]; /* flags - 3 bits; fragment offset - 13 bits */
-    unsigned char ttl;			/* time to live */
-    unsigned char proto;		/* protocol */
-    unsigned char csum[IP_CSUM_LEN];	/* header checksum */
-    unsigned char sa[IP_ADDR_LEN];	/* IP source address */
-    unsigned char da[IP_ADDR_LEN];	/* IP dest address */
+    unsigned char ttl;            /* time to live */
+    unsigned char proto;        /* protocol */
+    unsigned char csum[IP_CSUM_LEN];    /* header checksum */
+    unsigned char sa[IP_ADDR_LEN];    /* IP source address */
+    unsigned char da[IP_ADDR_LEN];    /* IP dest address */
 } ip_hdr_t;
 
 
@@ -100,25 +100,25 @@ typedef struct icmp_hdr {
 #define TCP_PLEN_LEN             2
 
 typedef struct tcp_hdr {
-    unsigned char sp[TCP_PORT_LEN];	/* Source port */
-    unsigned char dp[TCP_PORT_LEN];	/* Destination port */
-    unsigned char seqnum[TCP_SEQ_LEN];	/* Sequence number */
-    unsigned char acknum[TCP_SEQ_LEN];	/* Acknowledgement number */
-    unsigned char data_off;		/* Data Offset - 4 upper bits are valid */
+    unsigned char sp[TCP_PORT_LEN];    /* Source port */
+    unsigned char dp[TCP_PORT_LEN];    /* Destination port */
+    unsigned char seqnum[TCP_SEQ_LEN];    /* Sequence number */
+    unsigned char acknum[TCP_SEQ_LEN];    /* Acknowledgement number */
+    unsigned char data_off;        /* Data Offset - 4 upper bits are valid */
     unsigned char urg_ack_psh_rst_syn_fin; /* 6 lower bits are valid */
     unsigned char wsize[TCP_WSIZE_LEN]; /* Window */
-    unsigned char csum[TCP_CSUM_LEN];	/* Chekcsum */
-    unsigned char uptr[TCP_UPTR_LEN];	/* Urgent pointer */
-} tcp_hdr_t;		
+    unsigned char csum[TCP_CSUM_LEN];    /* Chekcsum */
+    unsigned char uptr[TCP_UPTR_LEN];    /* Urgent pointer */
+} tcp_hdr_t;        
 
 #define UDP_LEN_LEN              2
 #define UDP_CSUM_LEN             2
 
 typedef struct udp_hdr {
-    unsigned char sp[TCP_PORT_LEN];	/* Source port */
-    unsigned char dp[TCP_PORT_LEN];	/* Destination port */
-    unsigned char len[UDP_LEN_LEN];	/* length of packet */
-    unsigned char csum[UDP_CSUM_LEN];	/* checksum */
+    unsigned char sp[TCP_PORT_LEN];    /* Source port */
+    unsigned char dp[TCP_PORT_LEN];    /* Destination port */
+    unsigned char len[UDP_LEN_LEN];    /* length of packet */
+    unsigned char csum[UDP_CSUM_LEN];    /* checksum */
 } udp_hdr_t;
 
 #define BOOTP_OPTCODE_DHCP_SUBNET     1  /* Subnet mask */
@@ -126,7 +126,7 @@ typedef struct udp_hdr {
 #define BOOTP_OPTCODE_DHCP_DOMAIN     6  /* Domain */
 #define BOOTP_OPTCODE_DHCP_LEASE      51 /* Lease time*/ 
 #define BOOTP_OPTCODE_DHCP_TYPE       53 /* 53, 1, DHCP_TYPE_* */
-#define BOOTP_OPTCODE_DHCP_SID	      54 /* 54, 4, a.b.c.d, Server ID */
+#define BOOTP_OPTCODE_DHCP_SID          54 /* 54, 4, a.b.c.d, Server ID */
 #define BOOTP_OPTCODE_DHCP_RENEW      58 /* Renewal time */
 #define BOOTP_OPTCODE_DHCP_REBIND     59 /* Rebinding time */
 
@@ -145,7 +145,7 @@ typedef struct udp_hdr {
 #define BOOTP_OP_REPLY           2
 #define BOOTP_HWTYPE_ETH         1
 #define BOOTP_XID_LEN            4
-#define BOOTP_SEC_LEN		 2
+#define BOOTP_SEC_LEN         2
 #define BOOTP_CHLEN             16
 #define BOOTP_SN_LEN            64
 #define BOOTP_FL_LEN           128
@@ -155,21 +155,21 @@ typedef struct udp_hdr {
 #define BOOTP_SERVER_PORT       67
 
 typedef struct bootp_pkt {
-    unsigned char op;			/* packet op code */
-    unsigned char hwtype;		/* hardware type */
-    unsigned char hlen;		/* hardware address length */
-    unsigned char hops;		/* client sets to zero */
-    unsigned char xid[BOOTP_XID_LEN];	/* transaction ID, random */
+    unsigned char op;            /* packet op code */
+    unsigned char hwtype;        /* hardware type */
+    unsigned char hlen;        /* hardware address length */
+    unsigned char hops;        /* client sets to zero */
+    unsigned char xid[BOOTP_XID_LEN];    /* transaction ID, random */
     unsigned char secs[BOOTP_SEC_LEN]; /* seconds since boot */
-    unsigned char flags[2];		/* flags */
-    unsigned char ciaddr[IP_ADDR_LEN];	/* client IP ADDR */
-    unsigned char yiaddr[IP_ADDR_LEN];	/* Your IP Addr */
-    unsigned char siaddr[IP_ADDR_LEN];	/* Server IP ADDR */
-    unsigned char giaddr[IP_ADDR_LEN];	/* Gateway IP ADDR */
-    unsigned char chaddr[BOOTP_CHLEN];	/* Client Hardware Addr */
-    unsigned char sname[BOOTP_SN_LEN];	/* Server Name */
-    unsigned char file[BOOTP_FL_LEN];	/* File Path */
-    unsigned char vend[BOOTP_VEN_LEN];	/* Vendor Data */
+    unsigned char flags[2];        /* flags */
+    unsigned char ciaddr[IP_ADDR_LEN];    /* client IP ADDR */
+    unsigned char yiaddr[IP_ADDR_LEN];    /* Your IP Addr */
+    unsigned char siaddr[IP_ADDR_LEN];    /* Server IP ADDR */
+    unsigned char giaddr[IP_ADDR_LEN];    /* Gateway IP ADDR */
+    unsigned char chaddr[BOOTP_CHLEN];    /* Client Hardware Addr */
+    unsigned char sname[BOOTP_SN_LEN];    /* Server Name */
+    unsigned char file[BOOTP_FL_LEN];    /* File Path */
+    unsigned char vend[BOOTP_VEN_LEN];    /* Vendor Data */
 } bootp_pkt_t;
 
 typedef struct tcp_pseudo_hdr {
@@ -216,9 +216,9 @@ typedef enum tcp_cntrol_flags_e {
 
 
 typedef struct arp_entry {
-    unsigned char mac[ETH_ADDR_LEN];	/* MAC address */
-    unsigned char ip[IP_ADDR_LEN];	/* IP address */
-    unsigned char used; 		/* Is this entry used? */
+    unsigned char mac[ETH_ADDR_LEN];    /* MAC address */
+    unsigned char ip[IP_ADDR_LEN];    /* IP address */
+    unsigned char used;         /* Is this entry used? */
 } arp_entry_t;
 
 typedef arp_pkt_t  *arp_pkt_xp;

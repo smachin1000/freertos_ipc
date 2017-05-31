@@ -108,8 +108,8 @@ typedef enum IRQn
   ACE_PC2_Flag2_IRQn              = 74,       /*!< ACE SSE program counter 2 flag 2 interrupt           */
   ACE_PC2_Flag3_IRQn              = 75,       /*!< ACE SSE program counter 2 flag 3 interrupt           */
   ACE_ADC0_DataValid_IRQn         = 76,       /*!< ACE ADC0 data valid interrupt                        */
-  ACE_ADC1_DataValid_IRQn         = 77,       /*!< ACE ADC1 data valid interrupt		     			*/
-  ACE_ADC2_DataValid_IRQn         = 78,       /*!< ACE ADC2 data valid interrupt		     			*/
+  ACE_ADC1_DataValid_IRQn         = 77,       /*!< ACE ADC1 data valid interrupt                         */
+  ACE_ADC2_DataValid_IRQn         = 78,       /*!< ACE ADC2 data valid interrupt                         */
   ACE_ADC0_CalDone_IRQn           = 79,       /*!< ACE ADC0 calibration done interrupt                  */
   ACE_ADC1_CalDone_IRQn           = 80,       /*!< ACE ADC1 calibration done interrupt                  */
   ACE_ADC2_CalDone_IRQn           = 81,       /*!< ACE ADC2 calibration done interrupt                  */
@@ -553,14 +553,14 @@ typedef struct
     __IO uint32_t TIM1_CTRL;
     __IO uint32_t TIM1_RIS;
     __I  uint32_t TIM1_MIS;
-	
+    
     __I  uint32_t TIM2_VAL;
     __IO uint32_t TIM2_LOADVAL;
     __IO uint32_t TIM2_BGLOADVAL;
     __IO uint32_t TIM2_CTRL;
     __IO uint32_t TIM2_RIS;
     __I  uint32_t TIM2_MIS;
-	
+    
     __I  uint32_t TIM64_VAL_U;
     __I  uint32_t TIM64_VAL_L;
     __IO uint32_t TIM64_LOADVAL_U;
@@ -588,7 +588,7 @@ typedef struct
     __IO uint32_t TIM1_CTRL_RESERVED[29];
     __IO uint32_t TIM1_RIS[32];
     __I  uint32_t TIM1_MIS[32];
-	
+    
     __I  uint32_t TIM2_VALUE[32];
     __IO uint32_t TIM2_LOADVAL[32];
     __IO uint32_t TIM2_BGLOADVAL[32];
@@ -599,7 +599,7 @@ typedef struct
     __IO uint32_t TIM2_CTRL[29];
     __IO uint32_t TIM2_RIS[32];
     __I  uint32_t TIM2_MIS[32];
-	
+    
     __I  uint32_t TIM64VALUEU[32];
     __I  uint32_t TIM64VALUEL[32];
     __IO uint32_t TIM64LOADVALUEU[32];
@@ -654,7 +654,7 @@ typedef struct
 {
     __IO uint32_t RATIO_HIGH_LOW;
     __IO uint32_t BUFFER_STATUS;
-	     uint32_t RESERVED[6];
+         uint32_t RESERVED[6];
     PDMA_Channel_TypeDef CHANNEL[8];
 } PDMA_TypeDef;
 
@@ -741,7 +741,7 @@ typedef struct
     __IO uint32_t ANA_COMM_CTRL;
     __IO uint32_t DAC_SYNC_CTRL;
     __IO uint32_t PDMA_REQUEST;
-	     uint32_t RESERVED0[10];
+         uint32_t RESERVED0[10];
     __O  uint32_t PC0_LO;
     __O  uint32_t PC0_HI;
     __IO uint32_t PC0_CTRL;
@@ -790,33 +790,33 @@ typedef struct
     __O  uint32_t LC2_JMP_LO;
     __O  uint32_t LC2_JMP_HI;
     __O  uint32_t PC2_FLAGS;
-	     uint32_t RESERVED1;
-		 uint32_t RESERVED2;
+         uint32_t RESERVED1;
+         uint32_t RESERVED2;
     __IO uint32_t SSE_RAM_LO_IDATA;
     __IO uint32_t SSE_RAM_HI_IDATA;
-	     uint32_t RESERVED3[61];
+         uint32_t RESERVED3[61];
          AQ_config_t ACB_DATA[6];        
-	     uint32_t RESERVED4[59];
+         uint32_t RESERVED4[59];
     __IO uint32_t SSE_PC0;
     __IO uint32_t SSE_PC1;
     __IO uint32_t SSE_PC2;
-	     uint32_t RESERVED5[57];
+         uint32_t RESERVED5[57];
     __IO uint32_t SSE_DAC0_BYTES01;
     __IO uint32_t SSE_DAC1_BYTES01;
     __IO uint32_t SSE_DAC2_BYTES01;
-	     uint32_t RESERVED6[61];
+         uint32_t RESERVED6[61];
     __O  uint32_t SSE_ADC0_RESULTS;
     __O  uint32_t SSE_ADC1_RESULTS;
     __O  uint32_t SSE_ADC2_RESULTS;
-		 uint32_t RESERVED7[61];
+         uint32_t RESERVED7[61];
     __O  uint32_t SSE_PDMA_DATAIN;
-		 uint32_t RESERVED8[63];
+         uint32_t RESERVED8[63];
     __IO uint32_t SSE_RAM_DATA[512];
     __I  uint32_t ADC0_STATUS;
     __I  uint32_t ADC1_STATUS;
     __I  uint32_t ADC2_STATUS;
     __I  uint32_t COMPARATOR_STATUS;
-	     uint32_t RESERVED9[124];
+         uint32_t RESERVED9[124];
     __IO uint32_t SSE_IRQ_EN;
     __I  uint32_t SSE_IRQ;
     __O  uint32_t SSE_IRQ_CLR;
@@ -842,11 +842,11 @@ typedef struct
     __I  uint32_t PPE_SFFLAGS_IRQ;
     __O  uint32_t PPE_SFFLAGS_IRQ_CLR;
     __IO uint32_t FPGA_FLAGS_SEL;
-	     uint32_t RESERVED10[39];
+         uint32_t RESERVED10[39];
     __IO uint32_t PPE_PDMA_CTRL;
     __I  uint32_t PDMA_STATUS;
     __IO uint32_t PPE_PDMA_DATAOUT;
-	     uint32_t RESERVED11[61];
+         uint32_t RESERVED11[61];
     __I  uint32_t PPE_NOP;
     __IO uint32_t PPE_CTRL;
     __IO uint32_t PPE_PC_ETC;
@@ -898,7 +898,7 @@ typedef struct
     __I  uint32_t ADC2_FIFO_DATA1;
     __I  uint32_t ADC2_FIFO_DATA2;
     __I  uint32_t ADC2_FIFO_DATA3;
-		 uint32_t RESERVED15[177];  
+         uint32_t RESERVED15[177];  
     __IO uint32_t PPE_RAM_DATA[512];
 } ACE_TypeDef;
 
@@ -934,7 +934,7 @@ typedef struct
     __IO uint32_t PAGE_STATUS_0;
     __IO uint32_t PAGE_STATUS_1;
     __IO uint32_t SEGMENT;
-	__IO uint32_t ENVM_SELECT;
+    __IO uint32_t ENVM_SELECT;
 } NVM_TypeDef;
 
 /*----------------------------------------------------------------------------*/
@@ -1040,7 +1040,7 @@ typedef struct
 #define MAC_BASE                0x40003000U
 #define PDMA_BASE               0x40004000U
 #define TIMER_BASE              0x40005000U
-#define WATCHDOG_BASE		    0x40006000U
+#define WATCHDOG_BASE            0x40006000U
 #define H2F_IRQ_CTRL_BASE       0x40007000U
 #define UART1_BASE              0x40010000U
 #define SPI1_BASE               0x40011000U
@@ -1098,5 +1098,5 @@ typedef struct
 }
 #endif
 
-#endif	/* __A2FXXXM3_H__ */
+#endif    /* __A2FXXXM3_H__ */
 

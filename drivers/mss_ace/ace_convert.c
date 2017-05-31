@@ -694,12 +694,12 @@ uint16_t ACE_convert_from_mV
         voltage = voltage + apbs_range[gdec];
         if (voltage > 0)
         {
-	        adc_voltage = (uint32_t)voltage;
-	        adc_voltage = adc_voltage / (uint8_t)apbs_gain_lut[gdec];
+            adc_voltage = (uint32_t)voltage;
+            adc_voltage = adc_voltage / (uint8_t)apbs_gain_lut[gdec];
         }
         else
         {
-        	adc_voltage = 0;
+            adc_voltage = 0;
         }
     }
     

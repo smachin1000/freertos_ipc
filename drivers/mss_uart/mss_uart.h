@@ -192,11 +192,11 @@ typedef struct {
     UART_BitBand_TypeDef *  hw_reg_bit; /*!< Pointer to UART registers bit band area. */
     IRQn_Type               irqn;       /*!< UART's Cortex-M3 NVIC interrupt number. */
     
-	/* transmit related info (used with interrupt driven trnasmit): */
-	const uint8_t * tx_buffer;          /*!< Pointer to transmit buffer. */
-	uint32_t        tx_buff_size;       /*!< Transmit buffer size. */
-	uint32_t        tx_idx;             /*!< Index within trnamit buffer of next byte to transmit.*/
-	
+    /* transmit related info (used with interrupt driven trnasmit): */
+    const uint8_t * tx_buffer;          /*!< Pointer to transmit buffer. */
+    uint32_t        tx_buff_size;       /*!< Transmit buffer size. */
+    uint32_t        tx_idx;             /*!< Index within trnamit buffer of next byte to transmit.*/
+    
     /* receive interrupt handler:*/
     mss_uart_rx_handler_t rx_handler;   /*!< Pointer to user registered received handler. */
 } mss_uart_instance_t;
@@ -293,7 +293,7 @@ extern mss_uart_instance_t g_mss_uart1;
 void
 MSS_UART_init
 (
-	mss_uart_instance_t* this_uart,
+    mss_uart_instance_t* this_uart,
     uint32_t baud_rate,
     uint8_t line_config
 );
@@ -320,14 +320,14 @@ MSS_UART_init
     The tx_size parameter specifies the size, in bytes, of the data to be
     transmitted.
  
-  @return				This function does not return a value.
+  @return                This function does not return a value.
  */
 void 
 MSS_UART_polled_tx
 ( 
-	mss_uart_instance_t * this_uart, 
-	const uint8_t * pbuff,
-	uint32_t tx_size
+    mss_uart_instance_t * this_uart, 
+    const uint8_t * pbuff,
+    uint32_t tx_size
 );
 
 /***************************************************************************//**
@@ -348,13 +348,13 @@ MSS_UART_polled_tx
     The p_sz_string parameter is a pointer to a buffer containing the
     zero-terminated string to be transmitted.
  
-  @return				This function does not return a value.
+  @return                This function does not return a value.
  */
 void 
 MSS_UART_polled_tx_string
 ( 
-	mss_uart_instance_t * this_uart, 
-	const uint8_t * p_sz_string
+    mss_uart_instance_t * this_uart, 
+    const uint8_t * p_sz_string
 );
 
 
@@ -409,9 +409,9 @@ MSS_UART_polled_tx_string
 void 
 MSS_UART_irq_tx
 ( 
-	mss_uart_instance_t * this_uart, 
-	const uint8_t * pbuff,
-	uint32_t tx_size
+    mss_uart_instance_t * this_uart, 
+    const uint8_t * pbuff,
+    uint32_t tx_size
 );
 
 /***************************************************************************//**
@@ -476,13 +476,13 @@ MSS_UART_tx_complete
   @code
    int main( void )
    {
-      	uint8_t rx_buff[RX_BUFF_SIZE];
-      	uint32_t rx_idx  = 0;
+          uint8_t rx_buff[RX_BUFF_SIZE];
+          uint32_t rx_idx  = 0;
   
-      	MSS_UART_init( &g_mss_uart0, MSS_UART_57600_BAUD, MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT );
+          MSS_UART_init( &g_mss_uart0, MSS_UART_57600_BAUD, MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT );
   
-      	while( 1 )
-      	{
+          while( 1 )
+          {
            rx_size = MSS_UART_get_rx( &g_mss_uart0, rx_buff, sizeof(rx_buff) );
            if (rx_size > 0)
            {
@@ -499,11 +499,11 @@ MSS_UART_tx_complete
   @code
    int main( void )
    {
-      	MSS_UART_init( &g_mss_uart1, MSS_UART_57600_BAUD, MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT );
+          MSS_UART_init( &g_mss_uart1, MSS_UART_57600_BAUD, MSS_UART_DATA_8_BITS | MSS_UART_NO_PARITY | MSS_UART_ONE_STOP_BIT );
        MSS_UART_set_rx_handler( &g_mss_uart1, uart1_rx_handler, MSS_UART_FIFO_SINGLE_BYTE );
   
-      	while( 1 )
-      	{
+          while( 1 )
+          {
            task_a();
            task_b();
        }
@@ -512,7 +512,7 @@ MSS_UART_tx_complete
  
    void uart1_rx_handler( void )
    {
-      	uint8_t rx_buff[RX_BUFF_SIZE];
+          uint8_t rx_buff[RX_BUFF_SIZE];
        uint32_t rx_idx  = 0;
        rx_size = MSS_UART_get_rx( &g_mss_uart1, rx_buff, sizeof(rx_buff) );
        process_rx_data( rx_buff, rx_size );
@@ -585,7 +585,7 @@ MSS_UART_get_rx
 void
 MSS_UART_set_rx_handler
 (
-	mss_uart_instance_t *       this_uart,
+    mss_uart_instance_t *       this_uart,
     mss_uart_rx_handler_t       handler,
     mss_uart_rx_trig_level_t    trigger_level
 );
@@ -615,8 +615,8 @@ MSS_UART_set_rx_handler
 void
 MSS_UART_set_loopback
 (
-	mss_uart_instance_t *   this_uart,
-	mss_uart_loopback_t     loopback
+    mss_uart_instance_t *   this_uart,
+    mss_uart_loopback_t     loopback
 );
 
 #ifdef __cplusplus

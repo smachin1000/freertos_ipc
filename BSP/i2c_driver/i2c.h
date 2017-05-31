@@ -291,39 +291,39 @@ typedef mss_i2c_slave_handler_ret_t (*mss_i2c_slave_wr_handler_t)( uint8_t *, ui
  */
 typedef struct mss_i2c_instance
 {
-	uint_fast8_t ser_address;
-	/* Transmit related info:*/
-	uint_fast8_t target_addr;
+    uint_fast8_t ser_address;
+    /* Transmit related info:*/
+    uint_fast8_t target_addr;
 
-	/* Current transaction type (WRITE, READ, RANDOM_READ)*/
-	uint8_t transaction;
+    /* Current transaction type (WRITE, READ, RANDOM_READ)*/
+    uint8_t transaction;
 
-	uint_fast16_t random_read_addr;
+    uint_fast16_t random_read_addr;
 
     uint8_t options;
 
-	/* I2C hardware instance identification */
+    /* I2C hardware instance identification */
     IRQn_Type  irqn;
     I2C_TypeDef * hw_reg;
     I2C_BitBand_TypeDef * hw_reg_bit;
 
-	/* TX INFO: */
-	const uint8_t * tx_buffer;
-	uint_fast16_t tx_size;
-	uint_fast16_t tx_idx;
-	uint_fast8_t dir;
+    /* TX INFO: */
+    const uint8_t * tx_buffer;
+    uint_fast16_t tx_size;
+    uint_fast16_t tx_idx;
+    uint_fast8_t dir;
 
-	/* RX INFO: */
-	uint8_t * rx_buffer;
-	uint_fast16_t rx_size;
-	uint_fast16_t rx_idx;
+    /* RX INFO: */
+    uint8_t * rx_buffer;
+    uint_fast16_t rx_size;
+    uint_fast16_t rx_idx;
 
-	/* status variable: */
+    /* status variable: */
     volatile mss_i2c_status_t status;
 
-	/* Slave data: */
-	uint_fast8_t slave_mem_offset_length;
-	mss_i2c_slave_wr_handler_t slave_write_handler;
+    /* Slave data: */
+    uint_fast8_t slave_mem_offset_length;
+    mss_i2c_slave_wr_handler_t slave_write_handler;
 
 } mss_i2c_instance_t;
 
@@ -376,9 +376,9 @@ extern mss_i2c_instance_t g_mss_i2c1;
  */
 void MSS_I2C_init
 (
-	mss_i2c_instance_t * this_i2c,
-	uint8_t ser_address,
-	mss_i2c_clock_divider_t ser_clock_speed
+    mss_i2c_instance_t * this_i2c,
+    uint8_t ser_address,
+    mss_i2c_clock_divider_t ser_clock_speed
 );
 
 /*******************************************************************************
@@ -400,7 +400,7 @@ void MSS_I2C_init
   the write transaction completion using the MSS_I2C_status() function.
   ------------------------------------------------------------------------------
   @param this_i2c:
-  	The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
+      The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
     identifying the MSS I2C hardware block that will perform the requested
     function. There are two such data structures, g_mss_i2c0 and g_mss_i2c1,
     associated with MSS I2C 0 and MSS I2C 1 respectively. This parameter must
@@ -408,10 +408,10 @@ void MSS_I2C_init
     within the I2C driver.
 
   @param serial_addr:
-  	This parameter specifies the serial address of the target I2C device.
+      This parameter specifies the serial address of the target I2C device.
 
   @param write_buffer:
-  	This parameter is a pointer to a buffer holding the data to be written to
+      This parameter is a pointer to a buffer holding the data to be written to
     the target I2C device.
     Care must be taken not to release the memory used by this buffer before the
     write transaction completes. For example, it is not appropriate to return
@@ -422,11 +422,11 @@ void MSS_I2C_init
     written to the target I2C device.
 
   @param write_size:
-  	Number of bytes held in the write_buffer to be written to the target I2C
+      Number of bytes held in the write_buffer to be written to the target I2C
     device.
 
  @param options:
- 	The options parameter is used to indicate if the I2C bus should be released
+     The options parameter is used to indicate if the I2C bus should be released
     on completion of the write transaction. Using the MSS_I2C_RELEASE_BUS
     constant for the options parameter causes a STOP bit to be generated at the
     end of the write transaction causing the bus to be released for other I2C
@@ -436,10 +436,10 @@ void MSS_I2C_init
  */
 void MSS_I2C_write
 (
-	mss_i2c_instance_t * this_i2c,
-	uint8_t serial_addr,
-	const uint8_t * write_buffer,
-	uint16_t write_size,
+    mss_i2c_instance_t * this_i2c,
+    uint8_t serial_addr,
+    const uint8_t * write_buffer,
+    uint16_t write_size,
     uint8_t options
 );
 
@@ -455,7 +455,7 @@ void MSS_I2C_write
   MSS_I2C_status() function.
   ------------------------------------------------------------------------------
   @param this_i2c:
-  	The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
+      The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
     identifying the MSS I2C hardware block that will perform the requested
     function. There are two such data structures, g_mss_i2c0 and g_mss_i2c1,
     associated with MSS I2C 0 and MSS I2C 1 respectively. This parameter must
@@ -463,10 +463,10 @@ void MSS_I2C_write
     within the I2C driver.
 
   @param serial_addr:
-  	This parameter specifies the serial address of the target I2C device.
+      This parameter specifies the serial address of the target I2C device.
 
   @param read_buffer
-  	Pointer to a buffer where the data received from the target device will be
+      Pointer to a buffer where the data received from the target device will be
     stored.
     Care must be taken not to release the memory used by this buffer before the
     read transaction completes. For example, it is not appropriate to return
@@ -477,11 +477,11 @@ void MSS_I2C_write
     corrupting the newly allocated memory.
 
   @param read_size:
-  	This parameter is the number of bytes to read from the target device. This
+      This parameter is the number of bytes to read from the target device. This
     size must not exceed the size of the read_buffer buffer.
 
   @param options:
- 	The options parameter is used to indicate if the I2C bus should be released
+     The options parameter is used to indicate if the I2C bus should be released
     on completion of the read transaction. Using the MSS_I2C_RELEASE_BUS
     constant for the options parameter causes a STOP bit to be generated at the
     end of the read transaction causing the bus to be released for other I2C
@@ -491,10 +491,10 @@ void MSS_I2C_write
  */
 void MSS_I2C_read
 (
-	mss_i2c_instance_t * this_i2c,
-	uint8_t serial_addr,
-	uint8_t * read_buffer,
-	uint16_t read_size,
+    mss_i2c_instance_t * this_i2c,
+    uint8_t serial_addr,
+    uint8_t * read_buffer,
+    uint16_t read_size,
     uint8_t options
 );
 
@@ -506,7 +506,7 @@ void MSS_I2C_read
   the direction of the I2C transaction in order to read from the target device.
   ------------------------------------------------------------------------------
   @param this_i2c:
-  	The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
+      The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
     identifying the MSS I2C hardware block that will perform the requested
     function. There are two such data structures, g_mss_i2c0 and g_mss_i2c1,
     associated with MSS I2C 0 and MSS I2C 1 respectively. This parameter must
@@ -514,31 +514,31 @@ void MSS_I2C_read
     within the I2C driver.
 
   @param serial_addr:
-  	This parameter specifies the serial address of the target I2C device.
+      This parameter specifies the serial address of the target I2C device.
 
   @param addr_offset:
-  	This parameter is a pointer to the buffer containing the data that will be
+      This parameter is a pointer to the buffer containing the data that will be
     sent to the slave during the write phase of the write-read transaction. This
     data is typically used to specify an address offset specifying to the I2C
     slave device what data it must return during the read phase of the
     write-read transaction.
 
   @param offset_size:
-  	This parameter specifies the number of offset bytes to be written during the
+      This parameter specifies the number of offset bytes to be written during the
     write phase of the write-read transaction. This is typically the size of the
     buffer pointed to by the addr_offset parameter.
 
   @param read_buffer:
-  	This parameter is a pointer to the buffer where the data read from the I2C
+      This parameter is a pointer to the buffer where the data read from the I2C
     slave will be stored.
 
   @param read_size:
-  	This parameter specifies the number of bytes to read from the target I2C
+      This parameter specifies the number of bytes to read from the target I2C
     slave device. This size must not exceed the size of the buffer pointed to by
     the read_buffer parameter.
 
   @param options:
- 	The options parameter is used to indicate if the I2C bus should be released
+     The options parameter is used to indicate if the I2C bus should be released
     on completion of the write-read transaction. Using the MSS_I2C_RELEASE_BUS
     constant for the options parameter causes a STOP bit to be generated at the
     end of the write-read transaction causing the bus to be released for other
@@ -548,12 +548,12 @@ void MSS_I2C_read
  */
 void MSS_I2C_write_read
 (
-	mss_i2c_instance_t * this_i2c,
-	uint8_t serial_addr,
-	const uint8_t * addr_offset,
-	uint16_t offset_size,
-	uint8_t * read_buffer,
-	uint16_t read_size,
+    mss_i2c_instance_t * this_i2c,
+    uint8_t serial_addr,
+    const uint8_t * addr_offset,
+    uint16_t offset_size,
+    uint8_t * read_buffer,
+    uint16_t read_size,
     uint8_t options
 );
 
@@ -563,7 +563,7 @@ void MSS_I2C_write_read
   This function indicates the current state of a MSS I2C instance.
   ------------------------------------------------------------------------------
   @param this_i2c:
-  	The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
+      The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
     identifying the MSS I2C hardware block that will perform the requested
     function. There are two such data structures, g_mss_i2c0 and g_mss_i2c1,
     associated with MSS I2C 0 and MSS I2C 1 respectively. This parameter must
@@ -635,7 +635,7 @@ mss_i2c_status_t MSS_I2C_wait_complete
   write-read transaction.
   ------------------------------------------------------------------------------
   @param this_i2c:
-  	The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
+      The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
     identifying the MSS I2C hardware block that will perform the requested
     function. There are two such data structures, g_mss_i2c0 and g_mss_i2c1,
     associated with MSS I2C 0 and MSS I2C 1 respectively. This parameter must
@@ -643,18 +643,18 @@ mss_i2c_status_t MSS_I2C_wait_complete
     within the I2C driver.
 
   @param tx_buffer:
-  	This parameter is a pointer to the memory buffer holding the data to be
+      This parameter is a pointer to the memory buffer holding the data to be
     returned to the I2C master when this MSS I2C instance is the target of an
     I2C read or write-read transaction.
 
   @param tx_size:
-  	Size of the transmit buffer pointed to by the tx_buffer parameter.
+      Size of the transmit buffer pointed to by the tx_buffer parameter.
  */
 void MSS_I2C_set_slave_tx_buffer
 (
-	mss_i2c_instance_t * this_i2c,
-	uint8_t * tx_buffer,
-	uint16_t tx_size
+    mss_i2c_instance_t * this_i2c,
+    uint8_t * tx_buffer,
+    uint16_t tx_size
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -666,7 +666,7 @@ void MSS_I2C_set_slave_tx_buffer
   transaction (i.e. when it is the slave).
   ------------------------------------------------------------------------------
   @param this_i2c:
-  	The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
+      The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
     identifying the MSS I2C hardware block that will perform the requested
     function. There are two such data structures, g_mss_i2c0 and g_mss_i2c1,
     associated with MSS I2C 0 and MSS I2C 1 respectively. This parameter must
@@ -674,11 +674,11 @@ void MSS_I2C_set_slave_tx_buffer
     within the I2C driver.
 
   @param rx_buffer:
-  	This parameter is a pointer to the memory buffer allocated by the caller
+      This parameter is a pointer to the memory buffer allocated by the caller
     software to be used as a slave receive buffer.
 
   @param rx_size:
-  	Size of the slave receive buffer. This is the amount of memory that is
+      Size of the slave receive buffer. This is the amount of memory that is
     allocated to the buffer pointed to by rx_buffer.
     Note:   This buffer size will indirectly specify the maximum I2C write
             transaction length this MSS I2C instance can be the target of. This
@@ -688,9 +688,9 @@ void MSS_I2C_set_slave_tx_buffer
  */
 void MSS_I2C_set_slave_rx_buffer
 (
-	mss_i2c_instance_t * this_i2c,
-	uint8_t * rx_buffer,
-	uint16_t rx_size
+    mss_i2c_instance_t * this_i2c,
+    uint8_t * rx_buffer,
+    uint16_t rx_size
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -705,7 +705,7 @@ void MSS_I2C_set_slave_rx_buffer
   I2C master.
   ------------------------------------------------------------------------------
   @param this_i2c:
-  	The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
+      The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
     identifying the MSS I2C hardware block that will perform the requested
     function. There are two such data structures, g_mss_i2c0 and g_mss_i2c1,
     associated with MSS I2C 0 and MSS I2C 1 respectively. This parameter must
@@ -713,14 +713,14 @@ void MSS_I2C_set_slave_rx_buffer
     within the I2C driver.
 
   @param offset_length:
-  	The offset_length parameter configures the number of bytes to be interpreted
+      The offset_length parameter configures the number of bytes to be interpreted
     by the MSS I2C slave as a memory offset value during the write phase of
     write-read transactions.
  */
 void MSS_I2C_set_slave_mem_offset_length
 (
-	mss_i2c_instance_t * this_i2c,
-	uint8_t offset_length
+    mss_i2c_instance_t * this_i2c,
+    uint8_t offset_length
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -733,7 +733,7 @@ void MSS_I2C_set_slave_mem_offset_length
         into the slave’s transmit buffer and handled by the driver.
   ------------------------------------------------------------------------------
   @param this_i2c:
-  	The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
+      The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
     identifying the MSS I2C hardware block that will perform the requested
     function. There are two such data structures, g_mss_i2c0 and g_mss_i2c1,
     associated with MSS I2C 0 and MSS I2C 1 respectively. This parameter must
@@ -741,12 +741,12 @@ void MSS_I2C_set_slave_mem_offset_length
     within the I2C driver.
 
   @param handler:
-  	Pointer to the function that will process the I2C write request.
+      Pointer to the function that will process the I2C write request.
  */
 void MSS_I2C_register_write_handler
 (
-	mss_i2c_instance_t * this_i2c,
-	mss_i2c_slave_wr_handler_t handler
+    mss_i2c_instance_t * this_i2c,
+    mss_i2c_slave_wr_handler_t handler
 );
 
 /*-------------------------------------------------------------------------*//**
@@ -756,7 +756,7 @@ void MSS_I2C_register_write_handler
   receive data when it is the target of an I2C write or write-read transaction.
   ------------------------------------------------------------------------------
   @param this_i2c:
-  	The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
+      The this_i2c parameter is a pointer to an mss_i2c_instance_t structure
     identifying the MSS I2C hardware block that will perform the requested
     function. There are two such data structures, g_mss_i2c0 and g_mss_i2c1,
     associated with MSS I2C 0 and MSS I2C 1 respectively. This parameter must
@@ -765,7 +765,7 @@ void MSS_I2C_register_write_handler
  */
 void MSS_I2C_enable_slave_rx
 (
-	mss_i2c_instance_t * this_i2c
+    mss_i2c_instance_t * this_i2c
 );
 
 #ifdef __cplusplus

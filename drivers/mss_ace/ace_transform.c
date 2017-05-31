@@ -106,12 +106,12 @@ void get_calibration
 void write_transform_coefficients
 (
     ace_channel_handle_t channel_handle,
-	uint32_t m,
-	uint32_t c
+    uint32_t m,
+    uint32_t c
 );
 
 /*-------------------------------------------------------------------------*//**
-	  
+      
  */
 extern const uint8_t g_ace_external_varef_used[ACE_NB_OF_ADC];
 
@@ -154,23 +154,23 @@ int16_t ACE_get_default_c_offset
 /*-------------------------------------------------------------------------*//**
   See "mss_ace.h" for details of how to use this function.
   
-  	m = m2 * m1 * mext
-	c = (m2 * c1 * mext) + (c2 * mext)
+      m = m2 * m1 * mext
+    c = (m2 * c1 * mext) + (c2 * mext)
  */
 void ACE_set_linear_transform
 (
     ace_channel_handle_t channel_handle,
-	int16_t m2,
-	int16_t c2
+    int16_t m2,
+    int16_t c2
 )
 {
     adc_channel_id_t channel_id;
-	uint32_t m;
-	uint32_t c;
-	int32_t m32;
-	int64_t m64;
-	int32_t c32;
-	int64_t c64_1;
+    uint32_t m;
+    uint32_t c;
+    int32_t m32;
+    int64_t m64;
+    int32_t c32;
+    int64_t c64_1;
     int64_t c64_2;
     uint16_t m1;
     uint16_t c1;
@@ -289,7 +289,7 @@ uint32_t adjust_to_16bit_ace_format
 }
 
 /*-------------------------------------------------------------------------*//**
-	  
+      
  */
 void get_calibration
 (
@@ -442,8 +442,8 @@ void get_calibration
 void write_transform_coefficients
 (
     ace_channel_handle_t channel_handle,
-	uint32_t m,
-	uint32_t c
+    uint32_t m,
+    uint32_t c
 )
 {
     uint16_t m_ppe_offset;

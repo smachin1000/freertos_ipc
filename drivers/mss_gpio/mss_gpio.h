@@ -130,38 +130,38 @@ typedef enum __mss_gpio_id_t
   These definitions can also be used to identity GPIO through logical
   operations on the return value of function MSS_GPIO_get_inputs().
  */
-#define MSS_GPIO_0_MASK		    0x00000001UL
-#define MSS_GPIO_1_MASK		    0x00000002UL
+#define MSS_GPIO_0_MASK            0x00000001UL
+#define MSS_GPIO_1_MASK            0x00000002UL
 #define MSS_GPIO_2_MASK         0x00000004UL
-#define MSS_GPIO_3_MASK	        0x00000008UL
-#define MSS_GPIO_4_MASK	        0x00000010UL
-#define MSS_GPIO_5_MASK	        0x00000020UL
-#define MSS_GPIO_6_MASK	        0x00000040UL
-#define MSS_GPIO_7_MASK	        0x00000080UL
-#define MSS_GPIO_8_MASK	        0x00000100UL
-#define MSS_GPIO_9_MASK		    0x00000200UL
-#define MSS_GPIO_10_MASK		0x00000400UL
-#define MSS_GPIO_11_MASK		0x00000800UL
-#define MSS_GPIO_12_MASK		0x00001000UL
-#define MSS_GPIO_13_MASK		0x00002000UL
-#define MSS_GPIO_14_MASK		0x00004000UL
-#define MSS_GPIO_15_MASK		0x00008000UL
-#define MSS_GPIO_16_MASK		0x00010000UL
-#define MSS_GPIO_17_MASK		0x00020000UL
-#define MSS_GPIO_18_MASK		0x00040000UL
-#define MSS_GPIO_19_MASK		0x00080000UL
-#define MSS_GPIO_20_MASK		0x00100000UL
-#define MSS_GPIO_21_MASK		0x00200000UL
-#define MSS_GPIO_22_MASK		0x00400000UL
-#define MSS_GPIO_23_MASK		0x00800000UL
-#define MSS_GPIO_24_MASK		0x01000000UL
-#define MSS_GPIO_25_MASK		0x02000000UL
-#define MSS_GPIO_26_MASK		0x04000000UL
-#define MSS_GPIO_27_MASK		0x08000000UL
-#define MSS_GPIO_28_MASK		0x10000000UL
-#define MSS_GPIO_29_MASK		0x20000000UL
-#define MSS_GPIO_30_MASK		0x40000000UL
-#define MSS_GPIO_31_MASK		0x80000000UL
+#define MSS_GPIO_3_MASK            0x00000008UL
+#define MSS_GPIO_4_MASK            0x00000010UL
+#define MSS_GPIO_5_MASK            0x00000020UL
+#define MSS_GPIO_6_MASK            0x00000040UL
+#define MSS_GPIO_7_MASK            0x00000080UL
+#define MSS_GPIO_8_MASK            0x00000100UL
+#define MSS_GPIO_9_MASK            0x00000200UL
+#define MSS_GPIO_10_MASK        0x00000400UL
+#define MSS_GPIO_11_MASK        0x00000800UL
+#define MSS_GPIO_12_MASK        0x00001000UL
+#define MSS_GPIO_13_MASK        0x00002000UL
+#define MSS_GPIO_14_MASK        0x00004000UL
+#define MSS_GPIO_15_MASK        0x00008000UL
+#define MSS_GPIO_16_MASK        0x00010000UL
+#define MSS_GPIO_17_MASK        0x00020000UL
+#define MSS_GPIO_18_MASK        0x00040000UL
+#define MSS_GPIO_19_MASK        0x00080000UL
+#define MSS_GPIO_20_MASK        0x00100000UL
+#define MSS_GPIO_21_MASK        0x00200000UL
+#define MSS_GPIO_22_MASK        0x00400000UL
+#define MSS_GPIO_23_MASK        0x00800000UL
+#define MSS_GPIO_24_MASK        0x01000000UL
+#define MSS_GPIO_25_MASK        0x02000000UL
+#define MSS_GPIO_26_MASK        0x04000000UL
+#define MSS_GPIO_27_MASK        0x08000000UL
+#define MSS_GPIO_28_MASK        0x10000000UL
+#define MSS_GPIO_29_MASK        0x20000000UL
+#define MSS_GPIO_30_MASK        0x40000000UL
+#define MSS_GPIO_31_MASK        0x80000000UL
 
 /*-------------------------------------------------------------------------*//**
  * GPIO modes
@@ -173,11 +173,11 @@ typedef enum __mss_gpio_id_t
 /*-------------------------------------------------------------------------*//**
  * Possible GPIO inputs interrupt configurations.
  */
-#define MSS_GPIO_IRQ_LEVEL_HIGH			0x0000000000UL
-#define MSS_GPIO_IRQ_LEVEL_LOW			0x0000000020UL
-#define MSS_GPIO_IRQ_EDGE_POSITIVE		0x0000000040UL
-#define MSS_GPIO_IRQ_EDGE_NEGATIVE		0x0000000060UL
-#define MSS_GPIO_IRQ_EDGE_BOTH			0x0000000080UL
+#define MSS_GPIO_IRQ_LEVEL_HIGH            0x0000000000UL
+#define MSS_GPIO_IRQ_LEVEL_LOW            0x0000000020UL
+#define MSS_GPIO_IRQ_EDGE_POSITIVE        0x0000000040UL
+#define MSS_GPIO_IRQ_EDGE_NEGATIVE        0x0000000060UL
+#define MSS_GPIO_IRQ_EDGE_BOTH            0x0000000080UL
 
 /*-------------------------------------------------------------------------*//**
  * Possible states for GPIO configured as INOUT.

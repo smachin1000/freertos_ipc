@@ -7,7 +7,7 @@
  * SVN $Date: 2008-07-09 11:05:43 +0100 (Wed, 09 Jul 2008) $
  */
 #ifndef __CPU_TYPES_H
-#define __CPU_TYPES_H	1
+#define __CPU_TYPES_H    1
 
 /*------------------------------------------------------------------------------
  * Use the standard definitions provided with the compiler for uint32_t, int32_t
@@ -30,6 +30,6 @@
  */
 typedef unsigned int psr_t;
 
-#endif	/* __CPU_TYPES_H */
+#endif    /* __CPU_TYPES_H */
 
 
