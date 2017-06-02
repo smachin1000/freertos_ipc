@@ -22,7 +22,6 @@ void analog_read_loop(void *para)
       // analog potentiometer in ranges from about 600 to 3800.
       const double FILTER_BETA = 0.01;
       static uint16_t prev_result = USHRT_MAX;
-      long lValueToSend = 0;
 
       while (1) {
         const ace_channel_handle_t current_channel = ACE_get_first_channel();
@@ -37,9 +36,9 @@ void analog_read_loop(void *para)
             filtered_result = adc_result;
         }
 
-        lValueToSend = round(filtered_result);
+        const uint16_t value_to_send = round(filtered_result);
         if (uxQueueMessagesWaiting(queue_h) < QUEUE_LENGTH) {
-            const int xStatus = xQueueSendToBack(queue_h, &lValueToSend, 0);
+            const int xStatus = xQueueSendToBack(queue_h, &value_to_send, 0);
             if (xStatus != pdPASS) {
                 /* The send operation could not complete because the queue was full -
                    this must be an error as the queue should never contain more than

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 #include "a2fxxxm3.h"
 #include "./drivers/mss_gpio/mss_gpio.h"
@@ -38,7 +39,7 @@ int main()
     init_system();
 
     // Create a queue for task IPC
-    queue_h = xQueueCreate((unsigned portBASE_TYPE)QUEUE_LENGTH, sizeof(unsigned long));
+    queue_h = xQueueCreate((unsigned portBASE_TYPE)QUEUE_LENGTH, sizeof(uint16_t));
     if (queue_h == NULL) {
         printf("\r\nxQueueCreate failed, check there is enough heap memory allocated\r\n");
         return EXIT_FAILURE;

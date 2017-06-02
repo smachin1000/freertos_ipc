@@ -31,21 +31,23 @@ void led_initialization()
 void led_task(void *para)
 {
     while (1) {
+    	// wait until there's at least one message in the queue
         while (uxQueueMessagesWaiting(queue_h) == 0) {
             taskYIELD();
         }
-        // queue should now definitely have at least one value in it
-        long lReceivedValue;
-        const int xStatus = xQueueReceive(queue_h, &lReceivedValue, 0);
+        // queue should now definitely have at least one value in it, so read the value
+        // from the queue
+        uint16_t received_value;
+        const int xStatus = xQueueReceive(queue_h, &received_value, 0);
         if (xStatus == pdPASS) {
             // value received should be will be 600 to 3800, so threshold and scale it as 0-255 now
-            if (lReceivedValue < MIN_ANALOG_VALUE) {
-                lReceivedValue = MIN_ANALOG_VALUE;
+            if (received_value < MIN_ANALOG_VALUE) {
+                received_value = MIN_ANALOG_VALUE;
             }
-            if (lReceivedValue > MAX_ANALOG_VALUE) {
-                lReceivedValue = MAX_ANALOG_VALUE;
+            if (received_value > MAX_ANALOG_VALUE) {
+                received_value = MAX_ANALOG_VALUE;
             }
-            uint16_t scaled_value = round((lReceivedValue - MIN_ANALOG_VALUE) * 255.0 /
+            uint16_t scaled_value = round((received_value - MIN_ANALOG_VALUE) * 255.0 /
                                           (MAX_ANALOG_VALUE - MIN_ANALOG_VALUE));
             // now determine which of the 8 LEDs to light, remembering they
             // are opposite polarity.
