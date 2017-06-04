@@ -17,24 +17,108 @@
 extern xQueueHandle queue_h;
 extern int QUEUE_LENGTH;
 
+
+#define STOPPER 0                                      /* Smaller than any datum */
+#define    MEDIAN_FILTER_SIZE    (13)
+
+uint16_t median_filter(uint16_t datum)
+{
+ struct pair
+ {
+   struct pair   *point;                              /* Pointers forming list linked in sorted order */
+   uint16_t  value;                                   /* Values to sort */
+ };
+ static struct pair buffer[MEDIAN_FILTER_SIZE] = {};  /* Buffer of nwidth pairs */
+ static struct pair *datpoint = buffer;               /* Pointer into circular buffer of data */
+ static struct pair small = {NULL, STOPPER};          /* Chain stopper */
+ static struct pair big = {&small, 0};                /* Pointer to head (largest) of linked list.*/
+
+ struct pair *successor;                              /* Pointer to successor of replaced data item */
+ struct pair *scan;                                   /* Pointer used to scan down the sorted list */
+ struct pair *scanold;                                /* Previous value of scan */
+ struct pair *median;                                 /* Pointer to median */
+ uint16_t i;
+
+ if (datum == STOPPER)
+ {
+   datum = STOPPER + 1;                             /* No stoppers allowed. */
+ }
+
+ if ((++datpoint - buffer) >= MEDIAN_FILTER_SIZE)
+ {
+   datpoint = buffer;                               /* Increment and wrap data in pointer.*/
+ }
+
+ datpoint->value = datum;                           /* Copy in new datum */
+ successor = datpoint->point;                       /* Save pointer to old value's successor */
+ median = &big;                                     /* Median initially to first in chain */
+ scanold = NULL;                                    /* Scanold initially null. */
+ scan = &big;                                       /* Points to pointer to first (largest) datum in chain */
+
+ /* Handle chain-out of first item in chain as special case */
+ if (scan->point == datpoint)
+ {
+   scan->point = successor;
+ }
+ scanold = scan;                                     /* Save this pointer and   */
+ scan = scan->point ;                                /* step down chain */
+
+ /* Loop through the chain, normal loop exit via break. */
+ for (i = 0 ; i < MEDIAN_FILTER_SIZE; ++i)
+ {
+   /* Handle odd-numbered item in chain  */
+   if (scan->point == datpoint)
+   {
+     scan->point = successor;                      /* Chain out the old datum.*/
+   }
+
+   if (scan->value < datum)                        /* If datum is larger than scanned value,*/
+   {
+     datpoint->point = scanold->point;             /* Chain it in here.  */
+     scanold->point = datpoint;                    /* Mark it chained in. */
+     datum = STOPPER;
+   };
+
+   /* Step median pointer down chain after doing odd-numbered element */
+   median = median->point;                       /* Step median pointer.  */
+   if (scan == &small)
+   {
+     break;                                      /* Break at end of chain  */
+   }
+   scanold = scan;                               /* Save this pointer and   */
+   scan = scan->point;                           /* step down chain */
+
+   /* Handle even-numbered item in chain.  */
+   if (scan->point == datpoint)
+   {
+     scan->point = successor;
+   }
+
+   if (scan->value < datum)
+   {
+     datpoint->point = scanold->point;
+     scanold->point = datpoint;
+     datum = STOPPER;
+   }
+
+   if (scan == &small)
+   {
+     break;
+   }
+
+   scanold = scan;
+   scan = scan->point;
+ }
+ return median->value;
+}
+
 void analog_read_loop(void *para)
 {
-      // analog potentiometer in ranges from about 600 to 3800.
-      const double FILTER_BETA = 0.01;
-      static uint16_t prev_result = USHRT_MAX;
-
       while (1) {
         const ace_channel_handle_t current_channel = ACE_get_first_channel();
-        const uint16_t adc_result = ACE_get_ppe_sample( current_channel );
+        const uint16_t adc_result = ACE_get_ppe_sample(current_channel);
 
-        // analog reads from the pot are a bit noisy, so filter them with an LPF
-        double filtered_result;
-        if (prev_result != USHRT_MAX) {
-            filtered_result = FILTER_BETA * adc_result + (1 - FILTER_BETA) * prev_result;
-        }
-        else {
-            filtered_result = adc_result;
-        }
+        const uint16_t filtered_result = median_filter(adc_result);
 
         const uint16_t value_to_send = round(filtered_result);
         if (uxQueueMessagesWaiting(queue_h) < QUEUE_LENGTH) {
@@ -51,6 +135,5 @@ void analog_read_loop(void *para)
             // no space in transmit queue, so don't hog the CPU
             taskYIELD();
         }
-        prev_result = round(filtered_result);
     }
 }

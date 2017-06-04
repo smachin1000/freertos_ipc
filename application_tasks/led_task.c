@@ -7,7 +7,7 @@
 #include <math.h>
 
 static const int MAX_ANALOG_VALUE = 3800;
-static const int MIN_ANALOG_VALUE = 600;
+static const int MIN_ANALOG_VALUE = 650;
 
 /**
  * This task reads analog input values from the queue, then updates the LEDs
@@ -17,7 +17,7 @@ extern xQueueHandle queue_h;
 
 void led_initialization()
 {
-    /* Configuration of GPIO's */
+    /* Configuration of GPIOs */
     MSS_GPIO_config(MSS_GPIO_0, MSS_GPIO_OUTPUT_MODE );
     MSS_GPIO_config(MSS_GPIO_1, MSS_GPIO_OUTPUT_MODE );
     MSS_GPIO_config(MSS_GPIO_2, MSS_GPIO_OUTPUT_MODE );
@@ -40,26 +40,26 @@ void led_task(void *para)
         uint16_t received_value;
         const int xStatus = xQueueReceive(queue_h, &received_value, 0);
         if (xStatus == pdPASS) {
-            // value received should be will be 600 to 3800, so threshold and scale it as 0-255 now
+            // value received should be will be 650 to 3800, so threshold and scale it as 0-255 now
             if (received_value < MIN_ANALOG_VALUE) {
                 received_value = MIN_ANALOG_VALUE;
             }
             if (received_value > MAX_ANALOG_VALUE) {
                 received_value = MAX_ANALOG_VALUE;
             }
-            uint16_t scaled_value = round((received_value - MIN_ANALOG_VALUE) * 255.0 /
+            uint32_t scaled_value = round((received_value - MIN_ANALOG_VALUE) * 255.0 /
                                           (MAX_ANALOG_VALUE - MIN_ANALOG_VALUE));
             // now determine which of the 8 LEDs to light, remembering they
             // are opposite polarity.
-            uint8_t v = 255;
+            uint8_t v = 0;
             int x;
             for (x = 7;x >= 0;x--) {
                 if (scaled_value >= (1 << x)) {
-                    v = v & ~(1 << x);
-                    scaled_value -= (1 << x);
+                    v |= (1 << x);
+                    scaled_value = scaled_value / 2;
                 }
             }
-            MSS_GPIO_set_outputs(v);
+            MSS_GPIO_set_outputs(0xffffffff - v);
         }
         else {
             printf("\r\nError %d reading from queue\r\n", xStatus);
