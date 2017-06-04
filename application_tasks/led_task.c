@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "../main.h"
+
+// Define some upper and lower thresholds for the analog potentiometer read
 static const int MAX_ANALOG_VALUE = 3800;
 static const int MIN_ANALOG_VALUE = 650;
 
@@ -26,9 +29,9 @@ void led_initialization()
     MSS_GPIO_config(MSS_GPIO_7, MSS_GPIO_OUTPUT_MODE );
 }
 
-void led_task(xQueueHandle handle)
+void led_task(task_arg_t* ta)
 {
-	const xQueueHandle queue_h = handle;
+	const xQueueHandle queue_h = ta->queue_h;
 
     while (1) {
     	// wait until there's at least one message in the queue

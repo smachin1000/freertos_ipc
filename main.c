@@ -10,6 +10,8 @@
 #include "task.h"
 #include "queue.h"
 
+#include "main.h"
+
 #define SYS_TICK_CTRL_AND_STATUS_REG      0xE000E010
 #define SYS_TICK_CONFIG_REG               0xE0042038
 #define SYS_TICK_FCLK_DIV_32_NO_REF_CLK   0x31000000
@@ -29,8 +31,7 @@ static void init_system()
     led_initialization();
 } 
 
-xQueueHandle queue_h;
-const int QUEUE_LENGTH = 10;
+static task_arg_t ta;
 
 int main()
 {
@@ -38,9 +39,11 @@ int main()
     /* Initialization all necessary hardware components */
     init_system();
 
+    ta.QUEUE_LENGTH = 10;
+
     // Create a queue for task IPC
-    queue_h = xQueueCreate((unsigned portBASE_TYPE)QUEUE_LENGTH, sizeof(uint16_t));
-    if (queue_h == NULL) {
+    ta.queue_h = xQueueCreate((unsigned portBASE_TYPE)ta.QUEUE_LENGTH, sizeof(uint16_t));
+    if (ta.queue_h == NULL) {
         printf("\r\nxQueueCreate failed, check there is enough heap memory allocated\r\n");
         return EXIT_FAILURE;
     }
@@ -50,7 +53,7 @@ int main()
     c = xTaskCreate( led_task,                          // task "run" function
                      ( signed portCHAR * ) "led_task",  // task name
                      configMINIMAL_STACK_SIZE,          // task stack size in 32 bit words (not bytes)
-                     queue_h,                           // param to pass to run function
+                     &ta,                               // param to pass to run function
                      tskIDLE_PRIORITY + 1,              // task priority
                      NULL );                            // task handle
 
@@ -62,7 +65,7 @@ int main()
     c = xTaskCreate( analog_read_task,                          // task "run" function
                      ( signed portCHAR * ) "analog_read_task",  // task name
                      configMINIMAL_STACK_SIZE,          // task stack size in 32 bit words (not bytes)
-                     queue_h,                           // param to pass to run function
+                     &ta,                               // param to pass to run function
                      tskIDLE_PRIORITY + 1,              // task priority
                      NULL );                            // task handle
 
