@@ -13,8 +13,6 @@ static const int MIN_ANALOG_VALUE = 650;
  * This task reads analog input values from the queue, then updates the LEDs
  * to display the value like a bar graph.
  */
-extern xQueueHandle queue_h;
-
 void led_initialization()
 {
     /* Configuration of GPIOs */
@@ -28,8 +26,10 @@ void led_initialization()
     MSS_GPIO_config(MSS_GPIO_7, MSS_GPIO_OUTPUT_MODE );
 }
 
-void led_task(void *para)
+void led_task(xQueueHandle handle)
 {
+	const xQueueHandle queue_h = handle;
+
     while (1) {
     	// wait until there's at least one message in the queue
         while (uxQueueMessagesWaiting(queue_h) == 0) {

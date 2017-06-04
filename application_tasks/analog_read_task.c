@@ -14,12 +14,11 @@
  * This task reads the analog input value from the potentiometer and sends it
  * to the IPC queue.
  */
-extern xQueueHandle queue_h;
 extern int QUEUE_LENGTH;
 
 
 #define STOPPER 0                                      /* Smaller than any datum */
-#define    MEDIAN_FILTER_SIZE    (13)
+#define MEDIAN_FILTER_SIZE	(5)
 
 uint16_t median_filter(uint16_t datum)
 {
@@ -101,8 +100,7 @@ uint16_t median_filter(uint16_t datum)
      datum = STOPPER;
    }
 
-   if (scan == &small)
-   {
+   if (scan == &small) {
      break;
    }
 
@@ -112,15 +110,15 @@ uint16_t median_filter(uint16_t datum)
  return median->value;
 }
 
-void analog_read_loop(void *para)
+void analog_read_task(xQueueHandle handle)
 {
+	const xQueueHandle queue_h = handle;
+
       while (1) {
         const ace_channel_handle_t current_channel = ACE_get_first_channel();
         const uint16_t adc_result = ACE_get_ppe_sample(current_channel);
+        const uint16_t value_to_send = median_filter(adc_result);
 
-        const uint16_t filtered_result = median_filter(adc_result);
-
-        const uint16_t value_to_send = round(filtered_result);
         if (uxQueueMessagesWaiting(queue_h) < QUEUE_LENGTH) {
             const int xStatus = xQueueSendToBack(queue_h, &value_to_send, 0);
             if (xStatus != pdPASS) {

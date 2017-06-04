@@ -17,7 +17,7 @@
 
 extern void led_task(void *para);
 extern void led_initialization(void);
-extern void analog_read_loop(void *para);
+extern void analog_read_task(void *para);
 
 static void init_system()
 {
@@ -50,7 +50,7 @@ int main()
     c = xTaskCreate( led_task,                          // task "run" function
                      ( signed portCHAR * ) "led_task",  // task name
                      configMINIMAL_STACK_SIZE,          // task stack size in 32 bit words (not bytes)
-                     NULL,                              // params to pass to run function
+                     queue_h,                           // param to pass to run function
                      tskIDLE_PRIORITY + 1,              // task priority
                      NULL );                            // task handle
 
@@ -59,10 +59,10 @@ int main()
         return EXIT_FAILURE;
     }
 
-    c = xTaskCreate( analog_read_loop,                          // task "run" function
+    c = xTaskCreate( analog_read_task,                          // task "run" function
                      ( signed portCHAR * ) "analog_read_task",  // task name
                      configMINIMAL_STACK_SIZE,          // task stack size in 32 bit words (not bytes)
-                     NULL,                              // params to pass to run function
+                     queue_h,                           // param to pass to run function
                      tskIDLE_PRIORITY + 1,              // task priority
                      NULL );                            // task handle
 
